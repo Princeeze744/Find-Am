@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model State {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  isLive    Boolean  @default(false)
+  areas     Area[]
+  pros      Pro[]
+  waitlist  StateWaitlist[]
+  createdAt DateTime @default(now())
+}
+
+model Area {
+  id      String @id @default(cuid())
+  name    String
+  state   State  @relation(fields: [stateId], references: [id])
+  stateId String
+  pros    ProArea[]
+
+  @@unique([stateId, name])
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  icon      String   @default("")
+  tags      String   @default("")
+  priceFrom Int?
+  pros      Pro[]
+  createdAt DateTime @default(now())
+}
+
+model Pro {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  phone       String
+  whatsapp    String
+  trade       String
+  bio         String    @default("")
+  tags        String    @default("")
+  photoUrl    String    @default("")
+  priceGuide  String    @default("")
+  status      String    @default("pending")
+  vettedAt    DateTime?
+  vettedNotes String    @default("")
+  yearsExp    Int       @default(0)
+  replyMins   Int       @default(30)
+  jobsDone    Int       @default(0)
+  category    Category  @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  state       State     @relation(fields: [stateId], references: [id])
+  stateId     String
+  areas       ProArea[]
+  leads       Lead[]
+  reviews     Review[]
+  createdAt   DateTime  @default(now())
+}
+
+model ProArea {
+  pro    Pro    @relation(fields: [proId], references: [id], onDelete: Cascade)
+  proId  String
+  area   Area   @relation(fields: [areaId], references: [id], onDelete: Cascade)
+  areaId String
+
+  @@id([proId, areaId])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  pro       Pro      @relation(fields: [proId], references: [id], onDelete: Cascade)
+  proId     String
+  rating    Int
+  text      String   @default("")
+  author    String
+  area      String   @default("")
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  pro       Pro      @relation(fields: [proId], references: [id], onDelete: Cascade)
+  proId     String
+  source    String   @default("whatsapp_tap")
+  createdAt DateTime @default(now())
+}
+
+model ServiceRequest {
+  id        String   @id @default(cuid())
+  need      String
+  area      String   @default("")
+  phone     String   @default("")
+  status    String   @default("open")
+  createdAt DateTime @default(now())
+}
+
+model SearchLog {
+  id        String   @id @default(cuid())
+  query     String
+  results   Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model StateWaitlist {
+  id        String   @id @default(cuid())
+  state     State    @relation(fields: [stateId], references: [id])
+  stateId   String
+  contact   String
+  createdAt DateTime @default(now())
+}

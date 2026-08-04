@@ -83,3 +83,38 @@ in person: workshop visit, 2 jobs inspected, 2 references called, ID confirmed.
 4. Working search (tags) + no-dead-end request form + lead logging on WhatsApp taps.
 PARALLEL (Prince's legs): count "who knows a good X" in PH groups · interview 5 users +
 5 pros · vet pro #1 in person · photograph real pros (golden light, editorial style).
+
+## SESSION LOG — Day 2 (4 Aug 2026, evening) — THE BRAIN
+- BATTLE: npm installed Prisma 7 -> P1012 (url no longer in schema). Downgraded to
+  Prisma 6 (npm install prisma@6 @prisma/client@6). v7 prisma init left TWO landmines:
+  (1) prisma.config.ts hijacks v6 + skips .env loading — DELETED (backup kept);
+  (2) it OVERWROTE .env with prisma+postgres://localhost URL — replaced with real Neon.
+- SCARE: Neon endpoint named ep-withered-hall (same word as Story Box DB!). Verified
+  identity with `npx prisma db pull --print --url "..."` -> P4001 empty DB = fresh,
+  safe. Endpoint names are RANDOM — verify by introspection, never by name.
+- Neon "findam" DB created via Vercel Storage (store: neon-coral-village), attached
+  to find-am project. Env auto-injected in Vercel.
+- Migration `init` applied: State, Area, Category, Pro, ProArea, Review, Lead,
+  ServiceRequest, SearchLog, StateWaitlist. Prisma Client v6.19.3 generated.
+- Seed (prisma/seed.ts, run with npx tsx): Rivers (isLive), 10 PH areas, 7 categories
+  (incl. Musicians for long-tail), 3 vetted pros with vetting notes/dates, 1 verified
+  review (Mrs. Adaeze -> Chinedu).
+- HOMEPAGE NOW DB-DRIVEN: page.tsx = server component (prisma queries, revalidate 60)
+  -> HomeView.tsx client component (all Framer Motion preserved). Real vetted counts,
+  real review averages, Musicians appeared automatically. data.ts still supplies
+  ticker/voices/chips/icons (placeholder content + icon map).
+- GOTCHAS ADDED: Prisma 6 pin (v7 config format) · delete v7 prisma.config.ts ·
+  v7 init overwrites .env · verify DB identity via db pull --print · GitHub repo is
+  PUBLIC — no business-sensitive notes in this file.
+- SECURITY DEBT: DB password was pasted in chat — RESET NEON PASSWORD + update .env
+  (+ Vercel env) at next session start. Repo: github.com/Princeeze744/Find-Am (main).
+
+## NEXT SESSION — THE LIMBS
+1. Neon password reset (security debt) + Vercel deploy: verify postinstall "prisma
+   generate" in package.json (Story Box lesson: Vercel builds need it), confirm env
+   vars in Production, deploy, smoke test live URL.
+2. /[state]/[category] listing pages + /pro/[slug] profile (verification card with
+   real vettedAt + vettedNotes).
+3. Working search (name/trade/tags) + SearchLog + no-dead-end ServiceRequest form.
+4. Lead logging: WhatsApp tap -> POST /api/lead -> wa.me redirect.
+PARALLEL (Prince): discovery count · interviews · vet pro #1 · real photos.
