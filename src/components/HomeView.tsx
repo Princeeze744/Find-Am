@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import HeroRotator from "@/components/HeroRotator";
 import { motion } from "framer-motion";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -61,9 +62,11 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
           </div>
 
           <motion.div initial={{ opacity: 0, scale: 0.94, y: 30 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }} className="relative">
-            <div className="fa-photo fa-float relative aspect-[4/5] w-full max-w-md md:ml-auto">
-              <Image src="/images/hero-electrician.png" alt="A verified FindAm pro in Port Harcourt" fill priority sizes="(max-width: 768px) 100vw, 480px" className="object-cover" />
-            </div>
+            <HeroRotator slides={[
+              { src: "/images/hero-electrician.png", trade: "Electrician" },
+              { src: "/images/plumber-portrait.jpeg", trade: "Plumber" },
+              { src: "/images/keyboardist-wedding.png", trade: "Keyboardist" },
+            ]} />
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.4, duration: 0.7 }} className="fa-fluff absolute -bottom-5 left-2 flex items-center gap-3 px-5 py-3.5 md:left-8">
               <span className="fa-badge">&#10003; Verified</span>
               <div className="text-[13px] leading-tight">
