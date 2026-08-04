@@ -1,0 +1,222 @@
+function Logo({ size = 36 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-label="FindAm">
+      <rect width="48" height="48" rx="13" fill="#0F6E56" />
+      <path
+        d="M24 9c-5.8 0-10.5 4.6-10.5 10.3 0 7.6 8.9 15.9 9.8 16.7a1 1 0 0 0 1.4 0c.9-.8 9.8-9.1 9.8-16.7C34.5 13.6 29.8 9 24 9Z"
+        fill="#FAF7F2"
+      />
+      <path
+        d="M19.5 19.8l3.2 3.2 6-6.3"
+        stroke="#0F6E56"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+const categories = [
+  { name: "Electrician", d: "M13 2 4.5 13.5h6L10 22l8.5-11.5h-6L13 2Z" },
+  { name: "Plumber", d: "M12 3c3 4.2 6 7.4 6 11a6 6 0 0 1-12 0c0-3.6 3-6.8 6-11Z" },
+  { name: "Generator", d: "M4 9h12l2-3h2v12h-2l-2-3H4V9Zm0 0v6" },
+  { name: "AC repair", d: "M12 2v20M2 12h20M5 5l14 14M19 5 5 19" },
+  { name: "Tailor", d: "M6 4a2.5 2.5 0 1 0 2.4 3.3L20 20M18 4 8.4 16.7A2.5 2.5 0 1 0 6 20" },
+  { name: "Cleaner", d: "M12 2v7m0 0-6 4 1.5 9h9L18 13l-6-4Z" },
+];
+
+const artisans = [
+  { init: "CE", name: "Chinedu Eze", trade: "Electrician", areas: "Rumuola, GRA, Woji", rating: "4.9", reviews: 31, jobs: 84, reply: "~25 min" },
+  { init: "BO", name: "Blessing Okoro", trade: "Cleaner", areas: "GRA, Peter Odili, Trans-Amadi", rating: "5.0", reviews: 22, jobs: 57, reply: "~15 min" },
+  { init: "MI", name: "Musa Ibrahim", trade: "AC technician", areas: "Eliozu, Rumuodara, Woji", rating: "4.8", reviews: 27, jobs: 66, reply: "~40 min" },
+];
+
+export default function Home() {
+  return (
+    <div>
+      <header className="fa-nav sticky top-0 z-50">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
+          <div className="flex items-center gap-2.5">
+            <Logo />
+            <span className="text-lg font-semibold tracking-tight">FindAm</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="hidden text-sm text-[#5A6B63] sm:block">Port Harcourt</span>
+            <button className="fa-btn !px-4 !py-2 text-sm">Get early access</button>
+          </div>
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-6xl px-5 pb-20">
+        <section className="pt-14 text-center md:pt-24">
+          <p className="fa-rise text-xs font-semibold uppercase tracking-[0.2em] text-[#0F6E56]">
+            Port Harcourt&apos;s trusted hands
+          </p>
+          <h1
+            className="fa-serif fa-rise mx-auto mt-4 max-w-3xl text-[2.6rem] leading-[1.12] md:text-[4.2rem] md:leading-[1.06]"
+            style={{ animationDelay: "0.08s" }}
+          >
+            Find someone you can{" "}
+            <em className="not-italic text-[#0F6E56]">trust</em>, in two
+            minutes.
+          </h1>
+          <p
+            className="fa-rise mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-[#5A6B63] md:text-lg"
+            style={{ animationDelay: "0.16s" }}
+          >
+            Every artisan vetted in person &mdash; workshop visited, work
+            inspected, references called. Real reviews from real neighbours. No
+            stories, no fear.
+          </p>
+
+          <div
+            className="fa-input fa-rise mx-auto mt-9 flex max-w-xl items-center gap-3 px-5 py-4"
+            style={{ animationDelay: "0.24s" }}
+          >
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9AA8A1" strokeWidth="2" strokeLinecap="round">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" />
+            </svg>
+            <span className="text-[15px] text-[#9AA8A1]">
+              What do you need? Try &quot;AC repair&quot;
+            </span>
+          </div>
+
+          <div className="fa-rise mt-5 flex flex-wrap items-center justify-center gap-2" style={{ animationDelay: "0.3s" }}>
+            <span className="fa-chip">Generator not starting</span>
+            <span className="fa-chip">Leaking pipe</span>
+            <span className="fa-chip">House wiring</span>
+            <span className="fa-chip">Deep cleaning</span>
+          </div>
+
+          <div className="fa-rise mx-auto mt-12 grid max-w-2xl grid-cols-3 gap-3" style={{ animationDelay: "0.36s" }}>
+            <div>
+              <p className="fa-serif text-2xl text-[#0A4A3A] md:text-3xl">128</p>
+              <p className="mt-1 text-xs text-[#5A6B63] md:text-sm">artisans vetted in person</p>
+            </div>
+            <div>
+              <p className="fa-serif text-2xl text-[#0A4A3A] md:text-3xl">2,400+</p>
+              <p className="mt-1 text-xs text-[#5A6B63] md:text-sm">jobs matched</p>
+            </div>
+            <div>
+              <p className="fa-serif text-2xl text-[#0A4A3A] md:text-3xl">&#8358;0</p>
+              <p className="mt-1 text-xs text-[#5A6B63] md:text-sm">cost for you, forever</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-20 md:mt-28">
+          <h2 className="fa-serif text-center text-2xl md:text-3xl">
+            What do you need done?
+          </h2>
+          <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
+            {categories.map((c, i) => (
+              <div
+                key={c.name}
+                className="fa-tile fa-rise flex cursor-pointer flex-col items-center gap-2.5 px-4 py-5 text-center"
+                style={{ animationDelay: `${0.05 + i * 0.05}s` }}
+              >
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d={c.d} />
+                </svg>
+                <span className="text-sm font-medium">{c.name}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-20 md:mt-28">
+          <div className="flex items-end justify-between">
+            <h2 className="fa-serif text-2xl md:text-3xl">Top rated near you</h2>
+            <span className="text-sm font-medium text-[#0F6E56]">View all &rarr;</span>
+          </div>
+          <div className="mt-7 grid gap-4 md:grid-cols-3">
+            {artisans.map((a, i) => (
+              <div key={a.name} className="fa-surface fa-rise p-5" style={{ animationDelay: `${0.05 + i * 0.08}s` }}>
+                <div className="flex items-center gap-3.5">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#E4F5EE] text-sm font-bold text-[#0A4A3A]">
+                    {a.init}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold">{a.name}</span>
+                      <span className="fa-badge">&#10003; Verified</span>
+                    </div>
+                    <p className="mt-0.5 truncate text-[13px] text-[#5A6B63]">
+                      {a.trade} &middot; {a.areas}
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-3.5 flex items-center gap-4 text-[13px] text-[#5A6B63]">
+                  <span className="font-medium text-[#B78A2E]">&#9733; {a.rating} ({a.reviews})</span>
+                  <span>{a.jobs} jobs</span>
+                  <span>{a.reply} reply</span>
+                </div>
+                <button className="fa-btn mt-4 w-full text-[14px]">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5 13.9c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a13 13 0 0 1-5.8-5.1c-.7-1.1-1-2-1-2.6 0-.7.4-1.4.8-1.7.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2c.1.2.1.4 0 .6l-.4.6c-.2.2-.3.4-.1.7.5.8 1.8 2.2 3.3 2.9.3.1.5.1.7-.1l.7-.8c.2-.2.4-.3.7-.2l2 1c.3.1.5.2.5.4.1.1.1.6-.1 1Z" />
+                  </svg>
+                  Chat on WhatsApp
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-20 md:mt-28">
+          <h2 className="fa-serif text-center text-2xl md:text-3xl">
+            Why people trust FindAm
+          </h2>
+          <p className="mx-auto mt-3 max-w-lg text-center text-[15px] text-[#5A6B63]">
+            We don&apos;t list anybody. Every artisan passes the same
+            three-stage check before you ever see them.
+          </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {[
+              { n: "1", t: "We visit in person", d: "Our team goes to the workshop, confirms identity, and sees the tools and the trade with our own eyes." },
+              { n: "2", t: "We inspect real work", d: "Two completed jobs examined and two past customers called before any artisan is approved." },
+              { n: "3", t: "Neighbours keep score", d: "Only people who actually hired through FindAm can review, so the ratings stay honest." },
+            ].map((s, i) => (
+              <div key={s.n} className="fa-tile fa-rise p-6" style={{ animationDelay: `${0.05 + i * 0.08}s` }}>
+                <div className="fa-step-num">{s.n}</div>
+                <p className="mt-4 font-semibold">{s.t}</p>
+                <p className="mt-2 text-[14px] leading-relaxed text-[#5A6B63]">{s.d}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-20 md:mt-28">
+          <div className="fa-panel px-7 py-10 text-center md:px-16 md:py-16">
+            <h2 className="fa-serif mx-auto max-w-2xl text-[1.8rem] leading-snug md:text-4xl">
+              Are you an artisan with skilled hands and a good name?
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-[15px] leading-relaxed text-[#BFE8D9]">
+              Get verified, get seen, get steady work. The first 30 artisans
+              join free &mdash; we only succeed when you do.
+            </p>
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+              <button className="fa-btn-ghost">Join as an artisan</button>
+              <button className="fa-btn !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]">Request an artisan</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-[rgba(20,32,27,0.08)]">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-7 text-xs text-[#9AA8A1] md:flex-row">
+          <div className="flex items-center gap-2">
+            <Logo size={22} />
+            <span>FindAm &mdash; trusted hands, Port Harcourt</span>
+          </div>
+          <div className="flex gap-5">
+            <span>Vetted in person</span>
+            <span>Real reviews only</span>
+            <span>Free for you, always</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

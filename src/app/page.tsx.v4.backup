@@ -1,14 +1,81 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
-import { Counter, fadeUp, stagger } from "@/components/Motion";
-import { WhatsAppIcon, SearchIcon } from "@/components/Icons";
-import { categories, pros, ticker, voices, longTailChips, heroChips } from "@/lib/data";
+import { motion, useInView, useMotionValue, useSpring, type Variants } from "framer-motion";
+import { useEffect, useRef } from "react";
+
+function Logo({ size = 36 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-label="FindAm">
+      <rect width="48" height="48" rx="13" fill="#0F6E56" />
+      <path d="M24 9c-5.8 0-10.5 4.6-10.5 10.3 0 7.6 8.9 15.9 9.8 16.7a1 1 0 0 0 1.4 0c.9-.8 9.8-9.1 9.8-16.7C34.5 13.6 29.8 9 24 9Z" fill="#FAF7F2" />
+      <path d="M19.5 19.8l3.2 3.2 6-6.3" stroke="#0F6E56" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const mv = useMotionValue(0);
+  const spring = useSpring(mv, { duration: 1800, bounce: 0 });
+  useEffect(() => {
+    if (inView) mv.set(to);
+  }, [inView, mv, to]);
+  useEffect(() => {
+    const unsub = spring.on("change", (v) => {
+      if (ref.current) ref.current.textContent = Math.round(v).toLocaleString() + suffix;
+    });
+    return unsub;
+  }, [spring, suffix]);
+  return <span ref={ref}>0{suffix}</span>;
+}
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 26 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+};
+const stagger: Variants = { show: { transition: { staggerChildren: 0.08 } } };
 
 const headline = ["Find", "someone", "you", "can", "trust,", "in", "two", "minutes."];
+
+const categories = [
+  { name: "Electrician", d: "M13 2 4.5 13.5h6L10 22l8.5-11.5h-6L13 2Z" },
+  { name: "Plumber", d: "M12 3c3 4.2 6 7.4 6 11a6 6 0 0 1-12 0c0-3.6 3-6.8 6-11Z" },
+  { name: "Generator", d: "M4 9h12l2-3h2v12h-2l-2-3H4V9Zm0 0v6" },
+  { name: "AC repair", d: "M12 2v20M2 12h20M5 5l14 14M19 5 5 19" },
+  { name: "Tailor", d: "M6 4a2.5 2.5 0 1 0 2.4 3.3L20 20M18 4 8.4 16.7A2.5 2.5 0 1 0 6 20" },
+  { name: "Cleaner", d: "M12 2v7m0 0-6 4 1.5 9h9L18 13l-6-4Z" },
+];
+
+const artisans = [
+  { init: "CE", name: "Chinedu Eze", trade: "Electrician", areas: "Rumuola, GRA, Woji", rating: "4.9", reviews: 31, jobs: 84, reply: "~25 min" },
+  { init: "BO", name: "Blessing Okoro", trade: "Cleaner", areas: "GRA, Peter Odili, Trans-Amadi", rating: "5.0", reviews: 22, jobs: 57, reply: "~15 min" },
+  { init: "MI", name: "Musa Ibrahim", trade: "AC technician", areas: "Eliozu, Rumuodara, Woji", rating: "4.8", reviews: 27, jobs: 66, reply: "~40 min" },
+];
+
+const ticker = [
+  { who: "Ada in Woji", what: "found an electrician", when: "2 min ago" },
+  { who: "Emeka in GRA", what: "booked a deep clean", when: "9 min ago" },
+  { who: "Tari in Eliozu", what: "fixed a leaking pipe", when: "14 min ago" },
+  { who: "Mrs. Bello in Rumuola", what: "serviced her generator", when: "21 min ago" },
+  { who: "Ibinabo in Trans-Amadi", what: "found a tailor", when: "28 min ago" },
+  { who: "Chuks in Rumuodara", what: "found a wedding keyboardist", when: "33 min ago" },
+];
+
+const voices = [
+  { q: "He came same day, fixed the fault, and the price he said is the price I paid. I have kept his number.", w: "Mrs. Adaeze", a: "Woji" },
+  { q: "First time in Port Harcourt I did not have to beg somebody for a trusted person. I just checked FindAm.", w: "Ibim", a: "GRA" },
+  { q: "As an artisan, my phone used to be quiet. Now neighbours I have never met are calling me for work.", w: "Chinedu", a: "Electrician, Rumuola" },
+];
+
+function WhatsAppIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5 13.9c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a13 13 0 0 1-5.8-5.1c-.7-1.1-1-2-1-2.6 0-.7.4-1.4.8-1.7.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2c.1.2.1.4 0 .6l-.4.6c-.2.2-.3.4-.1.7.5.8 1.8 2.2 3.3 2.9.3.1.5.1.7-.1l.7-.8c.2-.2.4-.3.7-.2l2 1c.3.1.5.2.5.4.1.1.1.6-.1 1Z" />
+    </svg>
+  );
+}
 
 export default function Home() {
   return (
@@ -16,10 +83,22 @@ export default function Home() {
       <div className="fa-orb h-[420px] w-[420px] bg-[rgba(15,110,86,0.16)]" style={{ top: "-120px", right: "-100px" }} />
       <div className="fa-orb h-[360px] w-[360px] bg-[rgba(183,138,46,0.12)]" style={{ top: "600px", left: "-140px" }} />
 
-      <SiteHeader />
+      <header className="fa-nav sticky top-0 z-50">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
+          <motion.div initial={{ opacity: 0, x: -14 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="flex items-center gap-2.5">
+            <Logo />
+            <span className="text-lg font-semibold tracking-tight">FindAm</span>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="flex items-center gap-4">
+            <span className="hidden items-center gap-2 text-sm text-[#5A6B63] sm:flex">
+              <span className="fa-live-dot" /> Port Harcourt
+            </span>
+            <button className="fa-btn !px-4 !py-2 text-sm">Get early access</button>
+          </motion.div>
+        </div>
+      </header>
 
       <main className="mx-auto max-w-6xl px-5 pb-24">
-        {/* HERO */}
         <section className="grid items-center gap-10 pt-14 md:grid-cols-2 md:gap-14 md:pt-20">
           <div>
             <motion.p variants={fadeUp} initial="hidden" animate="show" className="text-xs font-semibold uppercase tracking-[0.22em] text-[#0F6E56]">
@@ -39,18 +118,21 @@ export default function Home() {
               ))}
             </h1>
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.0, duration: 0.7 }} className="mt-5 max-w-md text-[15px] leading-relaxed text-[#5A6B63] md:text-lg">
-              Every pro vetted in person &mdash; workshop visited, work inspected,
-              references called. No stories, no fear.
+              Every artisan vetted in person &mdash; workshop visited, work
+              inspected, references called. No stories, no fear.
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 1.15, duration: 0.7 }} className="fa-input mt-8 flex max-w-md items-center gap-3 px-5 py-4">
-              <SearchIcon />
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9AA8A1" strokeWidth="2" strokeLinecap="round">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.5-3.5" />
+              </svg>
               <input placeholder='Try "AC repair" or "drummer"' className="w-full bg-transparent text-[15px] outline-none placeholder:text-[#9AA8A1]" />
               <button className="fa-btn !rounded-xl !px-4 !py-2 text-sm">Search</button>
             </motion.div>
 
             <motion.div variants={stagger} initial="hidden" animate="show" transition={{ delayChildren: 1.3 }} className="mt-5 flex flex-wrap items-center gap-2">
-              {heroChips.map((c) => (
+              {["Generator not starting", "Leaking pipe", "House wiring", "Deep cleaning"].map((c) => (
                 <motion.span key={c} variants={fadeUp} className="fa-chip">{c}</motion.span>
               ))}
             </motion.div>
@@ -58,7 +140,7 @@ export default function Home() {
 
           <motion.div initial={{ opacity: 0, scale: 0.94, y: 30 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }} className="relative">
             <div className="fa-photo fa-float relative aspect-[4/5] w-full max-w-md md:ml-auto">
-              <Image src="/images/hero-electrician.png" alt="A verified FindAm pro in Port Harcourt" fill priority sizes="(max-width: 768px) 100vw, 480px" className="object-cover" />
+              <Image src="/images/hero-electrician.png" alt="A verified FindAm electrician in Port Harcourt" fill priority sizes="(max-width: 768px) 100vw, 480px" className="object-cover" />
             </div>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.4, duration: 0.7 }} className="fa-fluff absolute -bottom-5 left-2 flex items-center gap-3 px-5 py-3.5 md:left-8">
               <span className="fa-badge">&#10003; Verified</span>
@@ -70,7 +152,6 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* LIVE TICKER */}
         <motion.section initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="mt-20">
           <div className="fa-marquee">
             {[0, 1].map((track) => (
@@ -87,79 +168,72 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* CATEGORIES - editorial split */}
-        <section className="mt-24 md:mt-32">
-          <div className="grid gap-10 md:grid-cols-[1fr_1.4fr] md:gap-16">
-            <div>
-              <motion.h2 variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="fa-serif text-2xl md:text-4xl">
-                What do you<br />need done?
-              </motion.h2>
-              <motion.p variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="mt-4 max-w-xs text-[15px] leading-relaxed text-[#5A6B63]">
-                Every category below is stocked with pros we met face to face.
-                Prices start honest and stay honest.
-              </motion.p>
-              <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="mt-6">
-                <span className="cursor-pointer text-sm font-semibold text-[#0F6E56]">Browse all categories &rarr;</span>
-              </motion.div>
-            </div>
-            <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="grid gap-3 sm:grid-cols-2">
-              {categories.map((c) => (
-                <motion.div key={c.name} variants={fadeUp} whileTap={{ scale: 0.98 }} className="fa-fluff group flex cursor-pointer items-center gap-4 !rounded-2xl px-5 py-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#E4F5EE]">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d={c.d} />
-                    </svg>
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block font-semibold">{c.name}</span>
-                    <span className="block text-[13px] text-[#5A6B63]">{c.vetted} vetted &middot; from &#8358;{c.from}</span>
-                  </span>
-                  <span className="text-[#9AA8A1] transition-transform group-hover:translate-x-1">&rarr;</span>
-                </motion.div>
-              ))}
-            </motion.div>
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.9 }} className="mx-auto mt-16 grid max-w-2xl grid-cols-3 gap-3 text-center">
+          <div>
+            <p className="fa-serif text-2xl text-[#0A4A3A] md:text-4xl"><Counter to={128} /></p>
+            <p className="mt-1 text-xs text-[#5A6B63] md:text-sm">artisans vetted in person</p>
           </div>
-        </section>
+          <div>
+            <p className="fa-serif text-2xl text-[#0A4A3A] md:text-4xl"><Counter to={2400} suffix="+" /></p>
+            <p className="mt-1 text-xs text-[#5A6B63] md:text-sm">jobs matched</p>
+          </div>
+          <div>
+            <p className="fa-serif text-2xl text-[#0A4A3A] md:text-4xl">&#8358;<Counter to={0} /></p>
+            <p className="mt-1 text-xs text-[#5A6B63] md:text-sm">cost for you, forever</p>
+          </div>
+        </motion.div>
 
-        {/* TOP PROS - photo-led cards */}
         <section className="mt-24 md:mt-32">
-          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="flex items-end justify-between">
-            <h2 className="fa-serif text-2xl md:text-4xl">Top rated pros near you</h2>
-            <span className="cursor-pointer text-sm font-medium text-[#0F6E56]">View all &rarr;</span>
-          </motion.div>
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="mt-8 grid gap-5 md:grid-cols-3">
-            {pros.map((p) => (
-              <motion.div key={p.name} variants={fadeUp} className="fa-fluff overflow-hidden !p-0">
-                <div className="relative aspect-[4/3]">
-                  <Image src={p.img} alt={`${p.name}, verified ${p.trade.toLowerCase()} on FindAm`} fill sizes="(max-width: 768px) 100vw, 380px" className="object-cover" style={{ objectPosition: p.pos }} />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(6,40,31,0.75)] to-transparent px-5 pb-3.5 pt-10">
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold text-white">{p.name}</span>
-                      <span className="fa-badge !border-transparent !bg-[rgba(228,245,238,0.92)]">&#10003; Verified</span>
-                    </div>
-                    <p className="mt-0.5 text-[13px] text-[#CFE8DD]">{p.trade} &middot; {p.areas}</p>
-                  </div>
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center gap-4 text-[13px] text-[#5A6B63]">
-                    <span className="font-medium text-[#B78A2E]">&#9733; {p.rating} ({p.reviews})</span>
-                    <span>{p.jobs} jobs</span>
-                    <span>{p.reply}</span>
-                  </div>
-                  <a href={`https://wa.me/${p.wa}`} target="_blank" rel="noopener noreferrer" className="fa-btn mt-4 flex w-full text-[14px]">
-                    <WhatsAppIcon /> Chat on WhatsApp
-                  </a>
-                </div>
+          <motion.h2 variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="fa-serif text-center text-2xl md:text-4xl">
+            What do you need done?
+          </motion.h2>
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
+            {categories.map((c) => (
+              <motion.div key={c.name} variants={fadeUp} whileTap={{ scale: 0.96 }} className="fa-fluff flex cursor-pointer flex-col items-center gap-3 px-4 py-7 text-center">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#E4F5EE]">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d={c.d} />
+                  </svg>
+                </span>
+                <span className="text-sm font-semibold">{c.name}</span>
               </motion.div>
             ))}
           </motion.div>
         </section>
 
-        {/* WHY TRUST */}
+        <section className="mt-24 md:mt-32">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="flex items-end justify-between">
+            <h2 className="fa-serif text-2xl md:text-4xl">Top rated near you</h2>
+            <span className="cursor-pointer text-sm font-medium text-[#0F6E56]">View all &rarr;</span>
+          </motion.div>
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="mt-8 grid gap-5 md:grid-cols-3">
+            {artisans.map((a) => (
+              <motion.div key={a.name} variants={fadeUp} className="fa-fluff p-6">
+                <div className="flex items-center gap-3.5">
+                  <div className="flex h-13 w-13 items-center justify-center rounded-full bg-[#E4F5EE] p-3.5 text-sm font-bold text-[#0A4A3A]">{a.init}</div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold">{a.name}</span>
+                      <span className="fa-badge">&#10003;</span>
+                    </div>
+                    <p className="mt-0.5 truncate text-[13px] text-[#5A6B63]">{a.trade} &middot; {a.areas}</p>
+                  </div>
+                </div>
+                <div className="mt-4 flex items-center gap-4 text-[13px] text-[#5A6B63]">
+                  <span className="font-medium text-[#B78A2E]">&#9733; {a.rating} ({a.reviews})</span>
+                  <span>{a.jobs} jobs</span>
+                  <span>{a.reply}</span>
+                </div>
+                <button className="fa-btn mt-5 w-full text-[14px]"><WhatsAppIcon /> Chat on WhatsApp</button>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+
         <section className="mt-24 md:mt-32">
           <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="fa-photo relative aspect-[5/4]">
-              <Image src="/images/handshake-trust.png" alt="A homeowner welcoming a verified FindAm pro at her gate in GRA, Port Harcourt" fill sizes="(max-width: 768px) 100vw, 560px" className="object-cover" />
+              <Image src="/images/handshake-trust.png" alt="A homeowner welcoming a verified FindAm artisan at her gate in GRA, Port Harcourt" fill sizes="(max-width: 768px) 100vw, 560px" className="object-cover" />
             </motion.div>
             <div>
               <motion.h2 variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="fa-serif text-2xl md:text-4xl">
@@ -184,7 +258,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* LONG TAIL */}
         <section className="mt-24 md:mt-32">
           <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
             <div className="md:order-2">
@@ -203,7 +276,7 @@ export default function Home() {
                 us. We&apos;ll go out, find them, and vet them for you.
               </motion.p>
               <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="mt-6 flex flex-wrap gap-2">
-                {longTailChips.map((c) => (
+                {["Keyboardist", "Drummer", "MC", "Makeup artist", "Dispenser repair", "DSTV installer"].map((c) => (
                   <span key={c} className="fa-chip">{c}</span>
                 ))}
               </motion.div>
@@ -214,7 +287,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* VOICES */}
         <section className="mt-24 md:mt-32">
           <motion.h2 variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="fa-serif text-center text-2xl md:text-4xl">
             Voices from the city
@@ -230,25 +302,36 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* PRO RECRUITMENT PANEL */}
         <section className="mt-24 md:mt-32">
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="fa-panel px-7 py-12 text-center md:px-16 md:py-20">
             <h2 className="fa-serif mx-auto max-w-2xl text-[1.9rem] leading-snug md:text-5xl">
               Skilled hands and a good name?
             </h2>
             <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-[#BFE8D9] md:text-base">
-              Get verified, get seen, get steady work. The first 30 pros join
-              free &mdash; we only succeed when you do.
+              Get verified, get seen, get steady work. The first 30 artisans
+              join free &mdash; we only succeed when you do.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <button className="fa-btn-ghost">Join as a pro</button>
-              <button className="fa-btn !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]">Request a pro</button>
+              <button className="fa-btn-ghost">Join as an artisan</button>
+              <button className="fa-btn !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]">Request an artisan</button>
             </div>
           </motion.div>
         </section>
       </main>
 
-      <SiteFooter />
+      <footer className="border-t border-[rgba(14,23,19,0.08)]">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-xs text-[#9AA8A1] md:flex-row">
+          <div className="flex items-center gap-2">
+            <Logo size={22} />
+            <span>FindAm &mdash; trusted hands, Port Harcourt</span>
+          </div>
+          <div className="flex gap-5">
+            <span>Vetted in person</span>
+            <span>Real reviews only</span>
+            <span>Free for you, always</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
