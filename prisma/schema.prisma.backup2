@@ -54,11 +54,6 @@ model Pro {
   vettedAt    DateTime?
   vettedNotes String    @default("")
   yearsExp    Int       @default(0)
-  videoUrl    String    @default("")
-  instagram   String    @default("")
-  facebook    String    @default("")
-  tiktok      String    @default("")
-  workPhotos  String    @default("")
   replyMins   Int       @default(30)
   jobsDone    Int       @default(0)
   category    Category  @relation(fields: [categoryId], references: [id])

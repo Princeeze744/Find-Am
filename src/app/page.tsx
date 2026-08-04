@@ -26,7 +26,7 @@ export default async function Home() {
   );
   const fallbackIcon = "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1 5h2v6h-2V7Zm0 8h2v2h-2v-2Z";
 
-  const categories: HomeCategory[] = dbCategories.map((c) => ({
+  const categories: HomeCategory[] = dbCategories.filter((c) => c._count.pros > 0).map((c) => ({
     name: c.name,
     slug: c.slug,
     vetted: c._count.pros,

@@ -214,9 +214,9 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
                   <span key={c} className="fa-chip">{c}</span>
                 ))}
               </motion.div>
-              <motion.button variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="fa-btn mt-7">
-                Request any service
-              </motion.button>
+              <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="mt-7">
+                <Link href="/request" className="fa-btn inline-flex">Request any service</Link>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -248,8 +248,8 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
               free &mdash; we only succeed when you do.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <button className="fa-btn-ghost">Join as a pro</button>
-              <button className="fa-btn !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]">Request a pro</button>
+              <Link href="/join" className="fa-btn-ghost">Join as a pro</Link>
+              <Link href="/request" className="fa-btn !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]">Request a pro</Link>
             </div>
           </motion.div>
         </section>

@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Pro" ADD COLUMN     "facebook" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "instagram" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "tiktok" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "videoUrl" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "workPhotos" TEXT NOT NULL DEFAULT '';

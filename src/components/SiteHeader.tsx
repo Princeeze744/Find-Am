@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Logo from "./Logo";
 
 export default function SiteHeader() {
@@ -15,7 +16,7 @@ export default function SiteHeader() {
           <span className="hidden items-center gap-2 text-sm text-[#5A6B63] sm:flex">
             <span className="fa-live-dot" /> Port Harcourt
           </span>
-          <button className="fa-btn !px-4 !py-2 text-sm">Get early access</button>
+          <Link href="/join" className="fa-btn !px-4 !py-2 text-sm">For pros</Link>
         </motion.div>
       </div>
     </header>
