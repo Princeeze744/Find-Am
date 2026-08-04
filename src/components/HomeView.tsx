@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -107,7 +108,7 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
             </div>
             <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="grid gap-3 sm:grid-cols-2">
               {categories.map((c) => (
-                <motion.div key={c.name} variants={fadeUp} whileTap={{ scale: 0.98 }} className="fa-fluff group flex cursor-pointer items-center gap-4 !rounded-2xl px-5 py-4">
+                <motion.div key={c.name} variants={fadeUp} whileTap={{ scale: 0.98 }}><Link href={`/c/${c.slug}`} className="fa-fluff group flex cursor-pointer items-center gap-4 !rounded-2xl px-5 py-4">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#E4F5EE]">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <path d={c.d} />
@@ -118,7 +119,7 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
                     <span className="block text-[13px] text-[#5A6B63]">{c.vetted} vetted &middot; from &#8358;{c.from}</span>
                   </span>
                   <span className="text-[#9AA8A1] transition-transform group-hover:translate-x-1">&rarr;</span>
-                </motion.div>
+                </Link></motion.div>
               ))}
             </motion.div>
           </div>
@@ -133,7 +134,7 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="mt-8 grid gap-5 md:grid-cols-3">
             {pros.map((p) => (
               <motion.div key={p.name} variants={fadeUp} className="fa-fluff overflow-hidden !p-0">
-                <div className="relative aspect-[4/3]">
+                <Link href={`/pro/${p.slug}`} className="relative block aspect-[4/3]">
                   <Image src={p.img} alt={`${p.name}, verified ${p.trade.toLowerCase()} on FindAm`} fill sizes="(max-width: 768px) 100vw, 380px" className="object-cover" style={{ objectPosition: p.pos }} />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(6,40,31,0.75)] to-transparent px-5 pb-3.5 pt-10">
                     <div className="flex items-center gap-2">
@@ -142,7 +143,7 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
                     </div>
                     <p className="mt-0.5 text-[13px] text-[#CFE8DD]">{p.trade} &middot; {p.areas}</p>
                   </div>
-                </div>
+                </Link>
                 <div className="p-5">
                   <div className="flex items-center gap-4 text-[13px] text-[#5A6B63]">
                     <span className="font-medium text-[#B78A2E]">&#9733; {p.rating} ({p.reviews})</span>
