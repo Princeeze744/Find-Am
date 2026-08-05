@@ -204,3 +204,14 @@ photograph real pros golden-hour style.
    (lead-tied, verified). 5. 10 hero images from Prince -> rotator. 6. Session-aware
    "My dashboard" on bottom mobile bar too. 7. Vercel env sanity: ADMIN_KEY present,
    redeploy done? LAUNCH DEBT list still stands.
+
+## SESSION LOG — Day 4 continued — THE VISUAL-FIRST ERA
+- 11 brand portraits added (/public/images/pros): mc, makeup, carpenter, doctor,
+  lawyer x2, cleaner, decorator, electrician2, handshake2, vetting (verifier with
+  clipboard in workshop = THE trust image, now on the trust section throne).
+- HeroRotator expanded to 7 trades. NEW: film strip parade ("Whoever you need.
+  Vetted.") - drifting portrait gallery, hover-lift. NEW: golden dust particles
+  (pure CSS, reduced-motion safe). Owner-view profile fix + work gallery live.
+- Session-aware nav certified. All pushed; live deploy carries full atmosphere.
+- BENCH NEXT: dashboard self-editing · sleek Picker (kill native dropdowns) ·
+  state picker Nigeria UI · review capture · logo forge · launch debt.
