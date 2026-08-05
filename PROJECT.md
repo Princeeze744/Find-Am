@@ -249,3 +249,19 @@ hours. Read "Day N" as "Session N". The machine's new benchmark.
 - DECISION PENDING: dashboard glow-up vs "clear the theater" soft-launch prep.
   Soft-launch plan agreed in principle: retire fictional pros, honest empty states,
   real WhatsApp contact, then 5-10 hand-picked founding pros.
+
+## SESSION LOG — Day 5 complete — THE QA WAR
+- External QA (brother, iPhone) found: transparent menu, amateur menu design, dead
+  nav on real phones, picker chaos. ALL RESOLVED.
+- ROOT CAUSES (now LAW): (1) iOS containing-block trap — backdrop-filter on glass
+  header imprisoned fixed menu; (2) SAME trap via fa-fluff hover transform imprisoned
+  Picker backdrop (partial dim, no outside-dismiss); (3) animation-gated visibility
+  (opacity-0 waiting for JS); (4) cache fog (stale deploys + phone caches) confusing
+  every test. LAW: ALL overlays portal to document.body, forever. Content visible
+  without JS. Test live only after Vercel green, phone via incognito.
+- Menu: portaled, JS-proof, own close X, professional structure w/ descriptions.
+- Picker: portaled, full-viewport dim, outside-tap + Escape dismiss, tap-to-deselect,
+  compact density, contained internal scroll, dialog-on-desktop/sheet-on-mobile.
+- National join form live: state picker filters areas, API stores state. /join
+  force-dynamic (build-freeze bug). Favicon set + viewport discipline shipped.
+- Verdict from Prince: "perfectly working now."
