@@ -26,14 +26,7 @@ export default function Picker({
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     if (!open) setQuery("");
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpen(false);
-    }
-    if (open) window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKey);
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [open]);
 
   const selected = options.find((o) => o.id === value);
@@ -60,27 +53,28 @@ export default function Picker({
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
-            onClick={() => setOpen(false)}
-            className="fixed inset-0 z-[80] flex items-end justify-center bg-[rgba(6,40,31,0.4)] md:items-center md:p-6"
-          >
+          <>
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 16 }}
-              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-lg rounded-t-[1.6rem] bg-[#FDFBF7] px-5 pb-8 pt-3 shadow-[0_-20px_60px_rgba(6,40,31,0.25)] md:rounded-[1.6rem] md:pt-6 md:shadow-[0_30px_80px_rgba(6,40,31,0.3)]"
-              style={{ maxHeight: "80vh", display: "flex", flexDirection: "column" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 z-[80] bg-[rgba(6,40,31,0.35)]"
+            />
+            <motion.div
+              initial={{ y: 60, opacity: 0, scale: 0.98 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 40, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 340, damping: 30 }}
+              className="fixed inset-x-0 bottom-0 z-[90] mx-auto max-w-lg rounded-t-[1.8rem] bg-[#FDFBF7] px-5 pb-8 pt-3 shadow-[0_-20px_60px_rgba(6,40,31,0.25)] md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:rounded-[1.8rem] md:pt-6 md:shadow-[0_30px_80px_rgba(6,40,31,0.3)]"
+              style={{ maxHeight: "75vh" }}
             >
-              <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[rgba(14,23,19,0.12)] md:hidden" />
+              <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[rgba(14,23,19,0.12)]" />
               <p className="fa-serif text-center text-xl">{title}</p>
               {searchable && options.length > 6 && (
                 <input
+                  autoFocus={false}
                   className="fa-input mt-4 w-full px-4 py-3 text-[15px] outline-none placeholder:text-[#9AA8A1]"
                   placeholder="Type to filter..."
                   value={query}
@@ -92,8 +86,8 @@ export default function Picker({
                   Nothing to choose from yet &mdash; you can continue without this.
                 </p>
               )}
-              <div className="mt-4 flex flex-wrap gap-2 overflow-y-auto pb-2">
-                {filtered.length === 0 && options.length > 0 ? (
+              <div className="mt-4 flex flex-wrap gap-2 overflow-y-auto" style={{ maxHeight: "45vh" }}>
+                {filtered.length === 0 ? (
                   <p className="w-full py-6 text-center text-[14px] text-[#9AA8A1]">Nothing matches &ldquo;{query}&rdquo;</p>
                 ) : (
                   filtered.map((o) => (
@@ -109,7 +103,7 @@ export default function Picker({
                 )}
               </div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
