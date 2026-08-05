@@ -2,6 +2,7 @@ import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JoinForm from "@/components/JoinForm";
+import BackLink from "@/components/BackLink";
 import { prisma } from "@/lib/db";
 
 export const revalidate = 300;
@@ -16,7 +17,8 @@ export default async function JoinPage() {
     <div className="fa-texture relative min-h-screen">
       <SiteHeader />
       <main className="mx-auto max-w-5xl px-5 pb-24">
-        <section className="grid items-center gap-8 pt-12 md:grid-cols-2 md:gap-12">
+        <div className="pt-6"><BackLink /></div>
+        <section className="grid items-center gap-8 pt-6 md:grid-cols-2 md:gap-12">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#0F6E56]">For skilled hands</p>
             <h1 className="fa-serif mt-4 text-3xl leading-[1.12] md:text-5xl">

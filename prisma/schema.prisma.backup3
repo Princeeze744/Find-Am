@@ -59,10 +59,6 @@ model Pro {
   facebook    String    @default("")
   tiktok      String    @default("")
   workPhotos  String    @default("")
-  paidUntil   DateTime?
-  profileViews Int      @default(0)
-  otpCode     String    @default("")
-  otpExpires  DateTime?
   replyMins   Int       @default(30)
   jobsDone    Int       @default(0)
   category    Category  @relation(fields: [categoryId], references: [id])

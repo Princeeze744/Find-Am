@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Pro" ADD COLUMN     "otpCode" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "otpExpires" TIMESTAMP(3),
+ADD COLUMN     "paidUntil" TIMESTAMP(3),
+ADD COLUMN     "profileViews" INTEGER NOT NULL DEFAULT 0;

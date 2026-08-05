@@ -5,6 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { prisma } from "@/lib/db";
+import BackLink from "@/components/BackLink";
 
 export const revalidate = 60;
 
@@ -22,6 +23,8 @@ export default async function ProPage({ params }: { params: Promise<{ slug: stri
 
   if (!pro || pro.status !== "vetted") notFound();
 
+  prisma.pro.update({ where: { id: pro.id }, data: { profileViews: { increment: 1 } } }).catch(() => {});
+
   const ratings = pro.reviews.map((r) => r.rating);
   const avg = ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : null;
   const priceRows = pro.priceGuide ? pro.priceGuide.split("|") : [];
@@ -33,7 +36,8 @@ export default async function ProPage({ params }: { params: Promise<{ slug: stri
     <div className="fa-texture relative min-h-screen">
       <SiteHeader />
       <main className="mx-auto max-w-4xl px-5 pb-24">
-        <nav className="pt-8 text-sm text-[#9AA8A1]">
+        <div className="pt-6"><BackLink fallback="/" /></div>
+        <nav className="pt-3 text-sm text-[#9AA8A1]">
           <Link href="/" className="hover:text-[#0F6E56]">Home</Link>
           <span className="mx-2">/</span>
           <Link href={`/c/${pro.category.slug}`} className="hover:text-[#0F6E56]">{pro.category.name}</Link>

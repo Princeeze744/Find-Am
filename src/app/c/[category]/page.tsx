@@ -5,6 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { prisma } from "@/lib/db";
+import BackLink from "@/components/BackLink";
 
 export const revalidate = 60;
 
@@ -31,7 +32,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
     <div className="fa-texture relative min-h-screen">
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-5 pb-24">
-        <nav className="pt-8 text-sm text-[#9AA8A1]">
+        <div className="pt-6"><BackLink fallback="/" /></div>
+        <nav className="pt-3 text-sm text-[#9AA8A1]">
           <Link href="/" className="hover:text-[#0F6E56]">Home</Link>
           <span className="mx-2">/</span>
           <span className="text-[#5A6B63]">{cat.name}</span>
