@@ -97,6 +97,15 @@ export default function SiteHeader() {
                 <Logo size={30} />
                 <span className="text-base font-semibold text-[#F5F1EA]">FindAm</span>
               </div>
+              <button
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-[rgba(228,245,238,0.18)] text-[#F5F1EA]"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                  <path d="M6 6l12 12M18 6L6 18" />
+                </svg>
+              </button>
             </div>
 
             <nav className="flex-1 overflow-y-auto px-5 pt-2">
