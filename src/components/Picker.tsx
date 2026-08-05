@@ -81,6 +81,11 @@ export default function Picker({
                   onChange={(e) => setQuery(e.target.value)}
                 />
               )}
+              {options.length === 0 && (
+                <p className="w-full py-8 text-center text-[14px] text-[#9AA8A1]">
+                  Nothing to choose from yet &mdash; you can continue without this.
+                </p>
+              )}
               <div className="mt-4 flex flex-wrap gap-2 overflow-y-auto" style={{ maxHeight: "45vh" }}>
                 {filtered.length === 0 ? (
                   <p className="w-full py-6 text-center text-[14px] text-[#9AA8A1]">Nothing matches &ldquo;{query}&rdquo;</p>

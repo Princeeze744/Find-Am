@@ -234,3 +234,18 @@ The "Day 1-4" session logs above all occurred within a SINGLE ~18-hour span
 (evening of 4 Aug -> morning of 5 Aug 2026). Entire platform: empty repo to
 16 routes, identity system, national seed, visual-first design — in under 24
 hours. Read "Day N" as "Session N". The machine's new benchmark.
+
+## SESSION LOG — Day 5 (5 Aug 2026) — POLISH I + FIRST REAL QA
+- Sleek Picker (bottom-sheet, spring, filter, chip-glow) replaced native selects in
+  JoinForm (category) + RequestForm (area). Empty-state added (no more blank blur).
+- Success shields mounted on Application/Request received cards. Score: 8/10 from Prince.
+- FIRST EXTERNAL QA (Prince's brother, mobile): found (a) transparent mobile menu ->
+  fixed with solid backgroundColor fallback; (b) empty picker sheet on states ->
+  empty-state guard + suspected stale-live-code (verify after this push).
+- Favicon era: default favicon.ico removed; icon.svg + apple-icon.svg (emerald
+  pin-check interim mark) via Next conventions. Final logo forge still pending.
+- Viewport discipline: initialScale 1, maxScale 5 (accessibility preserved),
+  themeColor #0F6E56, overflow-x clip hardening.
+- DECISION PENDING: dashboard glow-up vs "clear the theater" soft-launch prep.
+  Soft-launch plan agreed in principle: retire fictional pros, honest empty states,
+  real WhatsApp contact, then 5-10 hand-picked founding pros.

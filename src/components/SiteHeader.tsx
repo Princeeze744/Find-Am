@@ -78,7 +78,7 @@ export default function SiteHeader() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35 }}
             className="fixed inset-0 z-[60] md:hidden"
-            style={{ background: "linear-gradient(180deg, #0A4A3A 0%, #06281F 100%)" }}
+            style={{ backgroundColor: "#06281F", backgroundImage: "linear-gradient(180deg, #0A4A3A 0%, #06281F 100%)" }}
           >
             <nav className="flex h-full flex-col justify-center gap-2 px-8">
               {[...links, signedIn ? proLink.in : proLink.out].map((l, i) => (

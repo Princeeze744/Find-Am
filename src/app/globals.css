@@ -368,3 +368,8 @@ body {
   .fa-filmstrip-track { animation: none; }
   .fa-portrait { transition: none; }
 }
+
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
