@@ -228,3 +228,9 @@ photograph real pros golden-hour style.
   pros, replace AI theater with real faces/reviews/numbers, discovery counting,
   shadow list. LAUNCH DEBT rule stands: nothing shared publicly while placeholders lie.
 - Next session opens with: attach this file + "Design Polish I" (or street report first).
+
+## CORRECTION FOR THE RECORD
+The "Day 1-4" session logs above all occurred within a SINGLE ~18-hour span
+(evening of 4 Aug -> morning of 5 Aug 2026). Entire platform: empty repo to
+16 routes, identity system, national seed, visual-first design — in under 24
+hours. Read "Day N" as "Session N". The machine's new benchmark.
