@@ -20,6 +20,16 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
   return (
     <div className="fa-texture relative">
       <div className="fa-orb h-[420px] w-[420px] bg-[rgba(15,110,86,0.16)]" style={{ top: "-120px", right: "-100px" }} />
+      {[
+        { left: "8%", size: 5, dur: 22, delay: 0 },
+        { left: "22%", size: 3, dur: 28, delay: 4 },
+        { left: "45%", size: 6, dur: 25, delay: 9 },
+        { left: "63%", size: 4, dur: 30, delay: 2 },
+        { left: "78%", size: 5, dur: 24, delay: 12 },
+        { left: "91%", size: 3, dur: 27, delay: 6 },
+      ].map((d, i) => (
+        <span key={i} className="fa-dust" style={{ left: d.left, bottom: "-20px", width: d.size * 3, height: d.size * 3, animationDuration: `${d.dur}s`, animationDelay: `${d.delay}s` }} />
+      ))}
       <div className="fa-orb h-[360px] w-[360px] bg-[rgba(183,138,46,0.12)]" style={{ top: "600px", left: "-140px" }} />
 
       <SiteHeader />
@@ -67,8 +77,12 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
           <motion.div initial={{ opacity: 0, scale: 0.94, y: 30 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }} className="relative">
             <HeroRotator slides={[
               { src: "/images/hero-electrician.png", trade: "Electrician" },
+              { src: "/images/pros/makeup.png", trade: "Makeup artist" },
+              { src: "/images/pros/mc.png", trade: "MC" },
               { src: "/images/plumber-portrait.jpeg", trade: "Plumber" },
-              { src: "/images/keyboardist-wedding.png", trade: "Keyboardist" },
+              { src: "/images/pros/carpenter.png", trade: "Carpenter" },
+              { src: "/images/pros/doctor.png", trade: "Doctor" },
+              { src: "/images/pros/cleaner.png", trade: "Cleaner" },
             ]} />
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.4, duration: 0.7 }} className="fa-fluff absolute -bottom-5 left-2 flex items-center gap-3 px-5 py-3.5 md:left-8">
               <span className="fa-badge">&#10003; Verified</span>
@@ -96,6 +110,34 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
             ))}
           </div>
         </motion.section>
+
+        {/* FILM STRIP - the cast */}
+        <section className="mt-20">
+          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="mb-6 text-center text-xs font-semibold uppercase tracking-[0.22em] text-[#0F6E56]">
+            Whoever you need. Vetted.
+          </motion.p>
+          <div className="fa-filmstrip">
+            {[0, 1].map((track) => (
+              <div key={track} className="fa-filmstrip-track" aria-hidden={track === 1}>
+                {[
+                  { src: "/images/pros/mc.png", t: "MC" },
+                  { src: "/images/pros/makeup.png", t: "Makeup artist" },
+                  { src: "/images/pros/carpenter.png", t: "Carpenter" },
+                  { src: "/images/pros/doctor.png", t: "Doctor" },
+                  { src: "/images/pros/lawyer.png", t: "Lawyer" },
+                  { src: "/images/pros/cleaner.png", t: "Cleaner" },
+                  { src: "/images/pros/decorator.png", t: "Interior decorator" },
+                  { src: "/images/hero-electrician.png", t: "Electrician" },
+                ].map((p) => (
+                  <div key={p.src + track} className="fa-portrait">
+                    <Image src={p.src} alt={`A verified FindAm ${p.t.toLowerCase()}`} fill sizes="190px" className="object-cover" />
+                    <span className="absolute bottom-3 left-3 z-10 text-[13px] font-semibold text-[#F5F1EA]">{p.t}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* CATEGORIES - editorial split */}
         <section className="mt-24 md:mt-32">
@@ -167,7 +209,7 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
         <section className="mt-24 md:mt-32">
           <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="fa-photo relative aspect-[5/4]">
-              <Image src="/images/handshake-trust.png" alt="A homeowner welcoming a verified FindAm pro at her gate in GRA, Port Harcourt" fill sizes="(max-width: 768px) 100vw, 560px" className="object-cover" />
+              <Image src="/images/pros/vetting.png" alt="A FindAm verifier inspecting an artisan workshop in Port Harcourt" fill sizes="(max-width: 768px) 100vw, 560px" className="object-cover" />
             </motion.div>
             <div>
               <motion.h2 variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="fa-serif text-2xl md:text-4xl">
