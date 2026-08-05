@@ -15,6 +15,7 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
     name: "", phone: "", whatsapp: "", trade: "", categoryId: "",
     yearsExp: "", bio: "", tags: "", priceGuide: "",
     instagram: "", facebook: "", tiktok: "", videoUrl: "", workPhotos: "",
+    customAreas: "", customTrade: "", idType: "", idNumber: "", idPhotoUrl: "",
   });
   const [areaIds, setAreaIds] = useState<string[]>([]);
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
@@ -28,6 +29,11 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (!form.idType) {
+      setErrorMsg("Please choose your ID type \u2014 identity verification is required.");
+      setState("error");
+      return;
+    }
     setState("sending");
     setErrorMsg("");
     try {
@@ -90,6 +96,7 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
         <div>
           <label className={label}>What do you do? *</label>
           <input className={input} placeholder="e.g. Electrician, Makeup artist, DJ" value={form.trade} onChange={set("trade")} required />
+          <input className={input + " mt-2"} placeholder="Category not in the list below? Type it here" value={form.customTrade} onChange={set("customTrade")} />
         </div>
         <div>
           <label className={label}>Category *</label>
@@ -128,6 +135,12 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
             </button>
           ))}
         </div>
+        <input
+          className={input + " mt-3"}
+          placeholder="Your area not listed? Type it here (comma separated)"
+          value={form.customAreas}
+          onChange={set("customAreas")}
+        />
       </div>
 
       <div>
@@ -164,6 +177,32 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
       <div>
         <label className={label}>Links to photos of your work</label>
         <textarea className={input} rows={2} placeholder="Paste links (Google Drive, Instagram posts...) separated by commas" value={form.workPhotos} onChange={set("workPhotos")} />
+      </div>
+
+      <div className="fa-fluff !rounded-2xl p-5">
+        <label className={label}>Identity verification (required &mdash; kept private)</label>
+        <p className="mb-3 text-[13px] leading-relaxed text-[#5A6B63]">
+          FindAm verifies every pro. Your ID is seen only by our vetting team,
+          never shown publicly. This protects customers &mdash; and protects
+          your good name from impersonators.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <Picker
+            options={[
+              { id: "NIN", label: "NIN" },
+              { id: "Voter\u0027s card", label: "Voter\u0027s card" },
+              { id: "Driver\u0027s license", label: "Driver\u0027s license" },
+              { id: "Int\u0027l passport", label: "Int\u0027l passport" },
+            ]}
+            value={form.idType}
+            onChange={(id) => setForm({ ...form, idType: id })}
+            placeholder="ID type *"
+            title="Which ID will you present?"
+            searchable={false}
+          />
+          <input className={input} placeholder="ID number *" value={form.idNumber} onChange={set("idNumber")} required />
+        </div>
+        <input className={input + " mt-3"} placeholder="Link to a clear photo of your ID * (Google Drive, etc.)" value={form.idPhotoUrl} onChange={set("idPhotoUrl")} required />
       </div>
 
       <div className="fa-fluff !rounded-2xl p-5">

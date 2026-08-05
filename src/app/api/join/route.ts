@@ -15,8 +15,11 @@ export async function POST(req: Request) {
     if (!b.name || !b.phone || !b.whatsapp || !b.categoryId || !b.trade) {
       return NextResponse.json({ error: "Please fill name, phone, WhatsApp, trade and category." }, { status: 400 });
     }
-    if (!Array.isArray(b.areaIds) || b.areaIds.length === 0) {
-      return NextResponse.json({ error: "Please select at least one area you cover." }, { status: 400 });
+    if ((!Array.isArray(b.areaIds) || b.areaIds.length === 0) && !String(b.customAreas || "").trim()) {
+      return NextResponse.json({ error: "Please select or type at least one area you cover." }, { status: 400 });
+    }
+    if (!b.idType || !b.idNumber || !b.idPhotoUrl) {
+      return NextResponse.json({ error: "Identity verification (ID type, number and photo link) is required." }, { status: 400 });
     }
 
     const state = b.stateId
@@ -44,6 +47,11 @@ export async function POST(req: Request) {
         facebook: String(b.facebook || "").trim(),
         tiktok: String(b.tiktok || "").trim(),
         workPhotos: String(b.workPhotos || "").trim(),
+        idType: String(b.idType || "").trim(),
+        idNumber: String(b.idNumber || "").trim(),
+        idPhotoUrl: String(b.idPhotoUrl || "").trim(),
+        customAreas: String(b.customAreas || "").trim(),
+        customTrade: String(b.customTrade || "").trim(),
         status: "pending",
         categoryId: String(b.categoryId),
         stateId: state.id,

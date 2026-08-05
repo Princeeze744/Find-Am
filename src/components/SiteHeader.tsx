@@ -66,7 +66,7 @@ export default function SiteHeader() {
             );
           })}
           <span className="ml-3 flex items-center gap-2 text-sm text-[#5A6B63]">
-            <span className="fa-live-dot" /> Port Harcourt
+            <span className="fa-live-dot" /> Nigeria
           </span>
         </motion.nav>
 
@@ -140,7 +140,7 @@ export default function SiteHeader() {
 
             <div className="border-t border-[rgba(228,245,238,0.1)] px-5 py-4">
               <p className="flex items-center gap-2 text-[13px] text-[rgba(228,245,238,0.7)]">
-                <span className="fa-live-dot" /> Port Harcourt &middot; free for you, always
+                <span className="fa-live-dot" /> Built in Nigeria &middot; free for you, always
               </p>
             </div>
           </motion.div>

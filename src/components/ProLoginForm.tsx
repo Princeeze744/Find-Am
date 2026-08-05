@@ -66,6 +66,9 @@ export default function ProLoginForm() {
           <button type="submit" disabled={busy} className="fa-btn w-full disabled:opacity-60">
             {busy ? "Verifying..." : "Sign in"}
           </button>
+          <button type="button" disabled={busy} onClick={requestCode} className="w-full text-center text-[13px] font-semibold text-[#0F6E56] underline disabled:opacity-60">
+            Resend code
+          </button>
           <button type="button" onClick={() => { setStep("number"); setCode(""); setError(""); }} className="w-full text-center text-[13px] text-[#5A6B63] underline">
             Use a different number
           </button>

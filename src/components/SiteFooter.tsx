@@ -7,7 +7,7 @@ export default function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-xs text-[#9AA8A1] md:flex-row">
         <div className="flex items-center gap-2">
           <Logo size={24} />
-          <span>FindAm &mdash; trusted hands, Port Harcourt</span>
+          <span>FindAm &mdash; trusted hands, Nigeria</span>
         </div>
         <div className="flex gap-5">
           <span>Vetted in person</span>

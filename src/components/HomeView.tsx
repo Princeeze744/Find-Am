@@ -39,7 +39,7 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
         <section className="grid items-center gap-10 pt-14 md:grid-cols-2 md:gap-14 md:pt-20">
           <div>
             <motion.p variants={fadeUp} initial="hidden" animate="show" className="text-xs font-semibold uppercase tracking-[0.22em] text-[#0F6E56]">
-              Port Harcourt&apos;s trusted hands
+              Nigeria&apos;s trusted hands
             </motion.p>
             <h1 className="fa-serif mt-5 max-w-xl text-[2.6rem] leading-[1.1] md:text-[3.6rem] md:leading-[1.06]">
               {headline.map((word, i) => (

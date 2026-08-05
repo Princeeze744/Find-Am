@@ -4,19 +4,12 @@ import Image from "next/image";
 import { useState } from "react";
 import Picker from "./Picker";
 
-type AreaOpt = { id: string; name: string };
-type StateOpt = { id: string; name: string; areas: AreaOpt[] };
-
-export default function RequestForm({ states, initialNeed = "" }: { states: StateOpt[]; initialNeed?: string }) {
+export default function RequestForm({ areas, initialNeed = "" }: { areas: { id: string; name: string }[]; initialNeed?: string }) {
   const [need, setNeed] = useState(initialNeed);
-  const [stateId, setStateId] = useState(states.find((s) => s.name === "Rivers")?.id || "");
   const [area, setArea] = useState("");
   const [phone, setPhone] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
-
-  const currentState = states.find((s) => s.id === stateId);
-  const areas = currentState?.areas ?? [];
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -26,7 +19,7 @@ export default function RequestForm({ states, initialNeed = "" }: { states: Stat
       const res = await fetch("/api/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ need, area: [currentState?.name, area].filter(Boolean).join(" - "), phone }),
+        body: JSON.stringify({ need, area, phone }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -68,29 +61,19 @@ export default function RequestForm({ states, initialNeed = "" }: { states: Stat
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className={label}>Your state *</label>
-          <Picker
-            options={states.map((s) => ({ id: s.id, label: s.name }))}
-            value={stateId}
-            onChange={(id) => { setStateId(id); setArea(""); }}
-            placeholder="Choose your state"
-            title="Which state are you in?"
-          />
-        </div>
-        <div>
           <label className={label}>Your area</label>
           <Picker
-            options={areas.map((a) => ({ id: a.name, label: a.name }))}
+            options={[...areas.map((a) => ({ id: a.name, label: a.name })), { id: "Other", label: "Other / not listed" }]}
             value={area}
             onChange={setArea}
             placeholder="Choose your area"
-            title={currentState ? `Where in ${currentState.name}?` : "Your area"}
+            title="Where in Port Harcourt?"
           />
         </div>
-      </div>
-      <div>
-        <label className={label}>Phone or WhatsApp *</label>
-        <input className={input} placeholder="e.g. 0803 123 4567" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+        <div>
+          <label className={label}>Phone or WhatsApp *</label>
+          <input className={input} placeholder="e.g. 0803 123 4567" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+        </div>
       </div>
       {state === "error" && (
         <p className="rounded-xl bg-[#FBEAF0] px-4 py-3 text-[14px] text-[#993556]">{errorMsg}</p>
