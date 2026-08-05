@@ -8,9 +8,9 @@ import { prisma } from "@/lib/db";
 export const dynamic = "force-dynamic";
 
 export default async function JoinPage() {
-  const [categories, rivers] = await Promise.all([
+  const [categories, states] = await Promise.all([
     prisma.category.findMany({ orderBy: { name: "asc" }, select: { id: true, name: true } }),
-    prisma.state.findUnique({ where: { slug: "rivers" }, include: { areas: { orderBy: { name: "asc" } } } }),
+    prisma.state.findMany({ orderBy: { name: "asc" }, include: { areas: { orderBy: { name: "asc" } } } }),
   ]);
 
   return (
@@ -45,7 +45,7 @@ export default async function JoinPage() {
           <p className="mt-2 mb-7 text-[14px] text-[#5A6B63]">
             Takes about 5 minutes. Our team reviews every application personally.
           </p>
-          <JoinForm categories={categories} areas={rivers?.areas ?? []} />
+          <JoinForm categories={categories} states={states.map((s) => ({ id: s.id, name: s.name, areas: s.areas.map((a) => ({ id: a.id, name: a.name })) }))} />
         </section>
       </main>
       <SiteFooter />

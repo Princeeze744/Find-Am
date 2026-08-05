@@ -19,9 +19,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Please select at least one area you cover." }, { status: 400 });
     }
 
-    const rivers = await prisma.state.findUnique({ where: { slug: "rivers" } });
-    if (!rivers) {
-      return NextResponse.json({ error: "Setup error. Please try again later." }, { status: 500 });
+    const state = b.stateId
+      ? await prisma.state.findUnique({ where: { id: String(b.stateId) } })
+      : await prisma.state.findUnique({ where: { slug: "rivers" } });
+    if (!state) {
+      return NextResponse.json({ error: "Please choose your state." }, { status: 400 });
     }
 
     const whatsapp = String(b.whatsapp).replace(/[^0-9]/g, "");
@@ -44,7 +46,7 @@ export async function POST(req: Request) {
         workPhotos: String(b.workPhotos || "").trim(),
         status: "pending",
         categoryId: String(b.categoryId),
-        stateId: rivers.id,
+        stateId: state.id,
         areas: { create: b.areaIds.map((areaId: string) => ({ areaId })) },
       },
     });

@@ -60,14 +60,14 @@ export default function Picker({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-[80] bg-[rgba(6,40,31,0.45)] backdrop-blur-[2px]"
+              className="fixed inset-0 z-[80] bg-[rgba(6,40,31,0.35)]"
             />
             <motion.div
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", stiffness: 320, damping: 32 }}
-              className="fixed inset-x-0 bottom-0 z-[90] mx-auto max-w-lg rounded-t-[1.8rem] bg-[#FDFBF7] px-5 pb-8 pt-3 shadow-[0_-20px_60px_rgba(6,40,31,0.25)]"
+              initial={{ y: 60, opacity: 0, scale: 0.98 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 40, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 340, damping: 30 }}
+              className="fixed inset-x-0 bottom-0 z-[90] mx-auto max-w-lg rounded-t-[1.8rem] bg-[#FDFBF7] px-5 pb-8 pt-3 shadow-[0_-20px_60px_rgba(6,40,31,0.25)] md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:rounded-[1.8rem] md:pt-6 md:shadow-[0_30px_80px_rgba(6,40,31,0.3)]"
               style={{ maxHeight: "75vh" }}
             >
               <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[rgba(14,23,19,0.12)]" />

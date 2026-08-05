@@ -6,8 +6,11 @@ import Picker from "./Picker";
 
 type Cat = { id: string; name: string };
 type AreaOpt = { id: string; name: string };
+type StateOpt = { id: string; name: string; areas: AreaOpt[] };
 
-export default function JoinForm({ categories, areas }: { categories: Cat[]; areas: AreaOpt[] }) {
+export default function JoinForm({ categories, states }: { categories: Cat[]; states: StateOpt[] }) {
+  const [stateId, setStateId] = useState(states.find((s) => s.name === "Rivers")?.id || "");
+  const areas = states.find((s) => s.id === stateId)?.areas ?? [];
   const [form, setForm] = useState({
     name: "", phone: "", whatsapp: "", trade: "", categoryId: "",
     yearsExp: "", bio: "", tags: "", priceGuide: "",
@@ -31,7 +34,7 @@ export default function JoinForm({ categories, areas }: { categories: Cat[]; are
       const res = await fetch("/api/join", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, areaIds }),
+        body: JSON.stringify({ ...form, areaIds, stateId }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -101,7 +104,18 @@ export default function JoinForm({ categories, areas }: { categories: Cat[]; are
       </div>
 
       <div>
-        <label className={label}>Areas you cover in Port Harcourt *</label>
+        <label className={label}>Your state *</label>
+        <Picker
+          options={states.map((s) => ({ id: s.id, label: s.name }))}
+          value={stateId}
+          onChange={(id) => { setStateId(id); setAreaIds([]); }}
+          placeholder="Choose your state"
+          title="Which state are you based in?"
+        />
+      </div>
+
+      <div>
+        <label className={label}>Areas you cover *</label>
         <div className="flex flex-wrap gap-2">
           {areas.map((a) => (
             <button
