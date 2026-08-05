@@ -7,16 +7,12 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 
 const links = [
-  { href: "/", label: "Home", desc: "Start here" },
-  { href: "/search", label: "Find a pro", desc: "Search anything" },
-  { href: "/request", label: "Request a pro", desc: "We find them for you" },
-  { href: "/join", label: "For pros", desc: "Join and get customers" },
+  { href: "/", label: "Home" },
+  { href: "/request", label: "Request a pro" },
+  { href: "/join", label: "For pros" },
 ];
 
-const proLink = {
-  in: { href: "/dashboard", label: "My dashboard", desc: "Your stats and profile" },
-  out: { href: "/pro-login", label: "Pro sign in", desc: "Access your dashboard" },
-};
+const proLink = { in: { href: "/dashboard", label: "My dashboard" }, out: { href: "/pro-login", label: "Pro sign in" } };
 
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -36,9 +32,6 @@ export default function SiteHeader() {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const desktopLinks = [...links.filter((l) => l.href !== "/search"), signedIn ? proLink.in : proLink.out];
-  const menuLinks = [...links, signedIn ? proLink.in : proLink.out];
-
   return (
     <header className="fa-nav sticky top-0 z-50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
@@ -50,7 +43,7 @@ export default function SiteHeader() {
         </motion.div>
 
         <motion.nav initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="hidden items-center gap-1 md:flex">
-          {desktopLinks.map((l) => {
+          {[...links, signedIn ? proLink.in : proLink.out].map((l) => {
             const active = pathname === l.href;
             return (
               <Link key={l.href} href={l.href} className={"relative rounded-xl px-4 py-2 text-sm font-medium transition-colors " + (active ? "text-[#0A4A3A]" : "text-[#5A6B63] hover:text-[#0A4A3A]")}>
@@ -83,58 +76,36 @@ export default function SiteHeader() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] flex flex-col md:hidden"
-            style={{ backgroundColor: "#06281F" }}
+            transition={{ duration: 0.35 }}
+            className="fixed inset-0 z-[60] md:hidden"
+            style={{ backgroundColor: "#06281F", backgroundImage: "linear-gradient(180deg, #0A4A3A 0%, #06281F 100%)" }}
           >
-            <div className="flex items-center justify-between border-b border-[rgba(228,245,238,0.1)] px-5 py-4">
-              <div className="flex items-center gap-2.5">
-                <Logo size={30} />
-                <span className="text-base font-semibold text-[#F5F1EA]">FindAm</span>
-              </div>
-            </div>
-
-            <nav className="flex-1 overflow-y-auto px-5 pt-2">
-              {menuLinks.map((l, i) => {
-                const active = pathname === l.href;
-                return (
-                  <motion.div
-                    key={l.href}
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ delay: 0.08 + i * 0.06, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            <nav className="flex h-full flex-col justify-center gap-2 px-8">
+              {[...links, signedIn ? proLink.in : proLink.out].map((l, i) => (
+                <motion.div
+                  key={l.href}
+                  initial={{ opacity: 0, y: 26 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 12 }}
+                  transition={{ delay: 0.12 + i * 0.09, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <Link
+                    href={l.href}
+                    className={"fa-serif block py-4 text-4xl " + (pathname === l.href ? "text-[#E4F5EE]" : "text-[rgba(228,245,238,0.6)]")}
                   >
-                    <Link
-                      href={l.href}
-                      className="flex items-center justify-between border-b border-[rgba(228,245,238,0.08)] py-4"
-                    >
-                      <span>
-                        <span className={"block text-[17px] font-semibold " + (active ? "text-[#E4F5EE]" : "text-[#D8EDE3]")}>
-                          {l.label}
-                        </span>
-                        <span className="mt-0.5 block text-[12px] text-[rgba(228,245,238,0.55)]">{l.desc}</span>
-                      </span>
-                      <span className={"text-[rgba(228,245,238,0.4)] " + (active ? "text-[#B78A2E]" : "")}>
-                        {active ? "\u25CF" : "\u2192"}
-                      </span>
-                    </Link>
-                  </motion.div>
-                );
-              })}
-
-              <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.45 }} className="mt-6">
-                <Link href="/request" className="fa-btn flex w-full !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]">
-                  Find me someone I can trust
-                </Link>
+                    {l.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.45 }}
+                className="mt-8 flex items-center gap-2 text-sm text-[rgba(228,245,238,0.7)]"
+              >
+                <span className="fa-live-dot" /> Port Harcourt &middot; free for you, always
               </motion.div>
             </nav>
-
-            <div className="border-t border-[rgba(228,245,238,0.1)] px-5 py-4">
-              <p className="flex items-center gap-2 text-[13px] text-[rgba(228,245,238,0.7)]">
-                <span className="fa-live-dot" /> Port Harcourt &middot; free for you, always
-              </p>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>
