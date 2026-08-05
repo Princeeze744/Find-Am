@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 
 export type PickerOption = { id: string; label: string };
 
@@ -22,6 +23,9 @@ export default function Picker({
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -58,6 +62,7 @@ export default function Picker({
         </svg>
       </button>
 
+      {mounted && createPortal(
       <AnimatePresence>
         {open && (
           <motion.div
@@ -100,7 +105,7 @@ export default function Picker({
                     <button
                       key={o.id}
                       type="button"
-                      onClick={() => { onChange(o.id); setOpen(false); }}
+                      onClick={() => { onChange(o.id === value ? "" : o.id); setOpen(false); }}
                       className={"fa-chip !cursor-pointer !px-3.5 !py-2 !text-[13.5px] " + (o.id === value ? "!border-[#0F6E56] !bg-[#E4F5EE] !text-[#0A4A3A] !font-semibold" : "")}
                     >
                       {o.label}
@@ -111,7 +116,8 @@ export default function Picker({
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+      document.body)}
     </>
   );
 }
