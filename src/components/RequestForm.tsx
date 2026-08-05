@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
+import Picker from "./Picker";
 
 export default function RequestForm({ areas, initialNeed = "" }: { areas: { id: string; name: string }[]; initialNeed?: string }) {
   const [need, setNeed] = useState(initialNeed);
@@ -35,6 +37,9 @@ export default function RequestForm({ areas, initialNeed = "" }: { areas: { id: 
   if (state === "done") {
     return (
       <div className="fa-fluff p-8 text-center">
+        <div className="relative mx-auto mb-4 h-28 w-28">
+          <Image src="/images/success-shield.jpeg" alt="" fill sizes="112px" className="object-cover object-center" style={{ borderRadius: "1.5rem" }} />
+        </div>
         <p className="fa-serif text-2xl text-[#0A4A3A]">Request received!</p>
         <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-[#5A6B63]">
           Our team is on it. We&apos;ll reach out on WhatsApp as soon as we have
@@ -57,13 +62,13 @@ export default function RequestForm({ areas, initialNeed = "" }: { areas: { id: 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className={label}>Your area</label>
-          <select className={input} value={area} onChange={(e) => setArea(e.target.value)}>
-            <option value="">Choose your area</option>
-            {areas.map((a) => (
-              <option key={a.id} value={a.name}>{a.name}</option>
-            ))}
-            <option value="Other">Other / not listed</option>
-          </select>
+          <Picker
+            options={[...areas.map((a) => ({ id: a.name, label: a.name })), { id: "Other", label: "Other / not listed" }]}
+            value={area}
+            onChange={setArea}
+            placeholder="Choose your area"
+            title="Where in Port Harcourt?"
+          />
         </div>
         <div>
           <label className={label}>Phone or WhatsApp *</label>

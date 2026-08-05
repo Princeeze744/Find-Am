@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
+import Picker from "./Picker";
 
 type Cat = { id: string; name: string };
 type AreaOpt = { id: string; name: string };
@@ -47,6 +49,9 @@ export default function JoinForm({ categories, areas }: { categories: Cat[]; are
   if (state === "done") {
     return (
       <div className="fa-fluff p-8 text-center">
+        <div className="relative mx-auto mb-4 h-28 w-28">
+          <Image src="/images/success-shield.jpeg" alt="" fill sizes="112px" className="object-cover object-center" style={{ borderRadius: "1.5rem" }} />
+        </div>
         <p className="fa-serif text-2xl text-[#0A4A3A]">Application received!</p>
         <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-[#5A6B63]">
           Thank you. Our team will review your application and reach out on WhatsApp
@@ -85,12 +90,13 @@ export default function JoinForm({ categories, areas }: { categories: Cat[]; are
         </div>
         <div>
           <label className={label}>Category *</label>
-          <select className={input} value={form.categoryId} onChange={set("categoryId")} required>
-            <option value="">Choose the closest category</option>
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>{c.name}</option>
-            ))}
-          </select>
+          <Picker
+            options={categories.map((c) => ({ id: c.id, label: c.name }))}
+            value={form.categoryId}
+            onChange={(id) => setForm({ ...form, categoryId: id })}
+            placeholder="Choose the closest category"
+            title="Which category fits you best?"
+          />
         </div>
       </div>
 
