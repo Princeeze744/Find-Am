@@ -98,12 +98,7 @@ export default function SiteHeader() {
               {menuLinks.map((l, i) => {
                 const active = pathname === l.href;
                 return (
-                  <motion.div
-                    key={l.href}
-                    initial={false}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.08 + i * 0.06, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                  >
+                  <div key={l.href}>
                     <Link
                       href={l.href}
                       className="flex items-center justify-between border-b border-[rgba(228,245,238,0.08)] py-4"
@@ -118,15 +113,15 @@ export default function SiteHeader() {
                         {active ? "\u25CF" : "\u2192"}
                       </span>
                     </Link>
-                  </motion.div>
+                  </div>
                 );
               })}
 
-              <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.45 }} className="mt-6">
+              <div className="mt-6">
                 <Link href="/request" className="fa-btn flex w-full !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]">
                   Find me someone I can trust
                 </Link>
-              </motion.div>
+              </div>
             </nav>
 
             <div className="border-t border-[rgba(228,245,238,0.1)] px-5 py-4">
