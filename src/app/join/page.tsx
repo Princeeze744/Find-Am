@@ -5,7 +5,7 @@ import JoinForm from "@/components/JoinForm";
 import BackLink from "@/components/BackLink";
 import { prisma } from "@/lib/db";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function JoinPage() {
   const [categories, rivers] = await Promise.all([
