@@ -10,12 +10,18 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/request", label: "Request a pro" },
   { href: "/join", label: "For pros" },
-  { href: "/pro-login", label: "Pro sign in" },
 ];
+
+const proLink = { in: { href: "/dashboard", label: "My dashboard" }, out: { href: "/pro-login", label: "Pro sign in" } };
 
 export default function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/pro-session").then((r) => r.json()).then((d) => setSignedIn(Boolean(d.signedIn))).catch(() => {});
+  }, [pathname]);
 
   useEffect(() => {
     setOpen(false);
@@ -37,7 +43,7 @@ export default function SiteHeader() {
         </motion.div>
 
         <motion.nav initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="hidden items-center gap-1 md:flex">
-          {links.map((l) => {
+          {[...links, signedIn ? proLink.in : proLink.out].map((l) => {
             const active = pathname === l.href;
             return (
               <Link key={l.href} href={l.href} className={"relative rounded-xl px-4 py-2 text-sm font-medium transition-colors " + (active ? "text-[#0A4A3A]" : "text-[#5A6B63] hover:text-[#0A4A3A]")}>
@@ -75,7 +81,7 @@ export default function SiteHeader() {
             style={{ background: "linear-gradient(180deg, #0A4A3A 0%, #06281F 100%)" }}
           >
             <nav className="flex h-full flex-col justify-center gap-2 px-8">
-              {links.map((l, i) => (
+              {[...links, signedIn ? proLink.in : proLink.out].map((l, i) => (
                 <motion.div
                   key={l.href}
                   initial={{ opacity: 0, y: 26 }}

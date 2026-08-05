@@ -168,3 +168,39 @@ PARALLEL (Prince): discovery count · interviews · vet pro #1 · real photos.
    Vercel env has ADMIN_KEY (done?) · live smoke test on phone.
 PARALLEL (Prince): vet pro #1 FOR REAL · discovery counting · shadow list starts ·
 photograph real pros golden-hour style.
+
+## SESSION LOG — Day 4 (5 Aug 2026) — IDENTITY + THE NATION
+- PRO AUTH LIVE: phone+OTP login (Option B: codes relay via admin panel w/ one-tap
+  WhatsApp copy; Termii upgrade slot ready). httpOnly cookie fa-pro, 30-day session.
+  /pro-login page, /api/pro-auth (request/verify/logout), /api/pro-session.
+- DASHBOARD v1: stats (profileViews, taps this week via Lead, all-time, rating),
+  details read-only, View my profile. Self-editing = next build. LogoutButton.
+- SESSION-AWARE UI: nav swaps "Pro sign in"<->"My dashboard" (fetches pro-session).
+  Pro profile recognizes owner: bottom panel becomes "This is your public profile ->
+  Open my dashboard" instead of self-messaging CTA (the "Prince messages himself" fix).
+- WORK GALLERY on profiles: workPhotos URLs -> grid; direct images render, other
+  links become "View work" tiles. NOTE: external image domains may need
+  next.config.ts whitelist when pros paste real URLs.
+- NIGERIA SEEDED: 37 states (36+FCT), ~190 areas, only Rivers isLive. willTravel
+  on Pro (migration will_travel). State-aware UI = next phase.
+- profileViews increments on every profile visit (fire-and-forget).
+- FIRST REAL PRO: Prince (pianist, Ada George) applied + vetted via full pipeline.
+- RESEARCH SYNTHESIS (Fiverr/Upwork/Thumbtack/UrbanCompany): our identity =
+  Fiverr storefront x UrbanCompany quality x Thumbtack lead economics, WhatsApp-
+  first. "Trust is the product." Visual-first (photos before names) = priority 1.
+  Pro dependency tools = priority 2. Thumbtack $3.2B validates pay-for-leads.
+- GOTCHAS ADDED: -Path vs -LiteralPath on [slug] BIT US AGAIN (Claude's own error) ·
+  never build mid-surgery (open ternary = JSX parse death) · multi-part patches on
+  shifted files -> read whole section, rewrite in one stroke · when a patch pair
+  half-lands, diagnose by reading before re-patching.
+- OTP-AT-SCALE ANSWERED: manual relay = bootstrap only; Termii slots in with one
+  change when real signups flow. Session cookie holds raw proId - upgrade to signed
+  token before money flows (SECURITY DEBT).
+
+## NEXT — THE FURNITURE PHASE
+1. Dashboard self-editing (bio/prices/tags/areas instant; photos/video flag for
+   review). 2. Sleek Picker component (bottom sheet) kills native dropdowns.
+3. State picker + state-aware home/search (Nigeria UI). 4. Review capture flow
+   (lead-tied, verified). 5. 10 hero images from Prince -> rotator. 6. Session-aware
+   "My dashboard" on bottom mobile bar too. 7. Vercel env sanity: ADMIN_KEY present,
+   redeploy done? LAUNCH DEBT list still stands.

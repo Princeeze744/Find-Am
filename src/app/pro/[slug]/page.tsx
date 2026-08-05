@@ -5,6 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { prisma } from "@/lib/db";
+import { cookies } from "next/headers";
 import BackLink from "@/components/BackLink";
 
 export const revalidate = 60;
@@ -28,6 +29,9 @@ export default async function ProPage({ params }: { params: Promise<{ slug: stri
   const ratings = pro.reviews.map((r) => r.rating);
   const avg = ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : null;
   const priceRows = pro.priceGuide ? pro.priceGuide.split("|") : [];
+  const jar = await cookies();
+  const isOwner = jar.get("fa-pro")?.value === pro.id;
+
   const vettedDate = pro.vettedAt
     ? new Date(pro.vettedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
     : null;
@@ -115,6 +119,23 @@ export default async function ProPage({ params }: { params: Promise<{ slug: stri
         )}
 
         <section className="mt-10">
+          {pro.workPhotos && (
+            <div className="mb-10">
+              <h2 className="fa-serif text-2xl">Recent work</h2>
+              <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3">
+                {pro.workPhotos.split(",").map((u) => u.trim()).filter(Boolean).slice(0, 6).map((u, i) => (
+                  <a key={i} href={u} target="_blank" rel="noopener noreferrer" className="fa-photo relative block aspect-[4/3] bg-[#EFEBE3]">
+                    {/\.(jpg|jpeg|png|webp)($|\?)/i.test(u) ? (
+                      <Image src={u} alt={`Work by ${pro.name} ${i + 1}`} fill sizes="(max-width: 768px) 50vw, 300px" className="object-cover" />
+                    ) : (
+                      <span className="absolute inset-0 flex items-center justify-center text-[13px] font-semibold text-[#0F6E56]">View work {i + 1} &#8599;</span>
+                    )}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
           <h2 className="fa-serif text-2xl">Verified reviews</h2>
           {pro.reviews.length === 0 ? (
             <p className="mt-4 text-[15px] text-[#5A6B63]">
@@ -138,11 +159,26 @@ export default async function ProPage({ params }: { params: Promise<{ slug: stri
         </section>
 
         <section className="fa-panel mt-14 px-7 py-10 text-center">
-          <p className="fa-serif text-2xl md:text-3xl">Ready when you are</p>
+          {isOwner ? (
+            <>
+              <p className="fa-serif text-2xl md:text-3xl">This is your public profile</p>
+              <p className="mx-auto mt-3 max-w-md text-[14px] leading-relaxed text-[#BFE8D9]">
+                Exactly what customers see when they find you. Keep your work
+                photos fresh and your prices honest.
+              </p>
+              <a href="/dashboard" className="fa-btn mx-auto mt-6 inline-flex !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]">
+                Open my dashboard
+              </a>
+            </>
+          ) : (
+            <>
+              <p className="fa-serif text-2xl md:text-3xl">Ready when you are</p>
           <p className="mx-auto mt-3 max-w-md text-[14px] leading-relaxed text-[#BFE8D9]">
             Message {pro.name.split(" ")[0]} now &mdash; he typically replies within {pro.replyMins} minutes.
           </p>
           <WhatsAppButton proId={pro.id} whatsapp={pro.whatsapp} source="profile_bottom" className="fa-btn mx-auto mt-6 flex !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]" />
+            </>
+          )}
         </section>
       </main>
       <SiteFooter />
