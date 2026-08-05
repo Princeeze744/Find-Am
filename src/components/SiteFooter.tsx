@@ -12,6 +12,7 @@ export default function SiteFooter() {
           <span>Vetted in person</span>
           <span>Real reviews only</span>
           <span>Free for you, always</span>
+          <a href="/pro-login" className="font-semibold text-[#0F6E56]">Pro sign in</a>
         </div>
       </div>
     </footer>

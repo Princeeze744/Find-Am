@@ -30,6 +30,10 @@ export default async function JoinPage() {
               nothing. We vet in person, so your verified badge actually means
               something.
             </p>
+            <p className="mt-4 text-[14px] text-[#5A6B63]">
+              Already on FindAm?{" "}
+              <a href="/pro-login" className="font-semibold text-[#0F6E56] underline">Sign in to your dashboard</a>
+            </p>
           </div>
           <div className="fa-photo relative aspect-[5/4]">
             <Image src="/images/join-hero.jpeg" alt="A Port Harcourt artisan receiving good news on his phone" fill priority sizes="(max-width: 768px) 100vw, 520px" className="object-cover" />

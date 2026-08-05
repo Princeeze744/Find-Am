@@ -18,13 +18,14 @@ type ProRow = {
 type Req = { id: string; need: string; area: string; phone: string; status: string; createdAt: string };
 type LeadRow = { id: string; source: string; createdAt: string; pro: { name: string } };
 type SearchRow = { id: string; query: string; results: number; createdAt: string };
+type OtpRow = { id: string; name: string; whatsapp: string; otpCode: string; otpExpires: string };
 
 export default function AdminView() {
   const [key, setKey] = useState("");
   const [entered, setEntered] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [data, setData] = useState<{ pending: Pending[]; pros: ProRow[]; requests: Req[]; leads: LeadRow[]; searches: SearchRow[] } | null>(null);
+  const [data, setData] = useState<{ pending: Pending[]; pros: ProRow[]; requests: Req[]; leads: LeadRow[]; searches: SearchRow[]; otps: OtpRow[] } | null>(null);
   const [notes, setNotes] = useState<Record<string, string>>({});
 
   const load = useCallback(async (k: string) => {
@@ -110,6 +111,30 @@ export default function AdminView() {
           </div>
         ))}
       </div>
+
+      {data.otps && data.otps.length > 0 && (
+        <>
+          <h2 className={h2}>Login codes waiting to be sent</h2>
+          <div className="space-y-3">
+            {data.otps.map((o) => (
+              <div key={o.id} className="fa-fluff flex flex-wrap items-center gap-3 border-l-4 !border-l-[#B78A2E] p-4">
+                <span className="font-semibold">{o.name}</span>
+                <span className="fa-serif text-xl tracking-[0.3em] text-[#0A4A3A]">{o.otpCode}</span>
+                <span className="text-[13px] text-[#5A6B63]">expires {new Date(o.otpExpires).toLocaleTimeString()}</span>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(`Your FindAm sign-in code is ${o.otpCode}. It expires in 10 minutes. - FindAm team`);
+                    window.open(`https://wa.me/${o.whatsapp}`, "_blank");
+                  }}
+                  className="fa-btn ml-auto !px-4 !py-2 text-[13px]"
+                >
+                  Copy + open WhatsApp
+                </button>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       <h2 className={h2}>Pending applications</h2>
       {data.pending.length === 0 ? (

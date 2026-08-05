@@ -9,6 +9,11 @@ function authorized(req: Request) {
 export async function GET(req: Request) {
   if (!authorized(req)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
+  const otps = await prisma.pro.findMany({
+    where: { otpCode: { not: "" }, otpExpires: { gt: new Date() } },
+    select: { id: true, name: true, whatsapp: true, otpCode: true, otpExpires: true },
+  });
+
   const [pending, pros, requests, leads, searches] = await Promise.all([
     prisma.pro.findMany({
       where: { status: "pending" },
@@ -25,7 +30,7 @@ export async function GET(req: Request) {
     prisma.searchLog.findMany({ orderBy: { createdAt: "desc" }, take: 50 }),
   ]);
 
-  return NextResponse.json({ pending, pros, requests, leads, searches });
+  return NextResponse.json({ pending, pros, requests, leads, searches, otps });
 }
 
 export async function POST(req: Request) {

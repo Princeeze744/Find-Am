@@ -63,7 +63,6 @@ model Pro {
   profileViews Int      @default(0)
   otpCode     String    @default("")
   otpExpires  DateTime?
-  willTravel  Boolean   @default(false)
   replyMins   Int       @default(30)
   jobsDone    Int       @default(0)
   category    Category  @relation(fields: [categoryId], references: [id])

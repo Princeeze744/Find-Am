@@ -10,6 +10,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/request", label: "Request a pro" },
   { href: "/join", label: "For pros" },
+  { href: "/pro-login", label: "Pro sign in" },
 ];
 
 export default function SiteHeader() {
