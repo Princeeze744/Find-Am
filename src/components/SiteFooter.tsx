@@ -1,4 +1,5 @@
 import Logo from "./Logo";
+import { FINDAM_WHATSAPP } from "@/lib/config";
 
 export default function SiteFooter() {
   return (
@@ -13,6 +14,9 @@ export default function SiteFooter() {
           <span>Real reviews only</span>
           <span>Free for you, always</span>
           <a href="/pro-login" className="font-semibold text-[#0F6E56]">Pro sign in</a>
+          {FINDAM_WHATSAPP && (
+            <a href={`https://wa.me/${FINDAM_WHATSAPP}`} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#0F6E56]">Talk to us</a>
+          )}
         </div>
       </div>
     </footer>

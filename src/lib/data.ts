@@ -13,7 +13,14 @@ export const pros = [
   { name: "Tamuno David", trade: "Keyboardist", areas: "All of Port Harcourt", rating: "4.8", reviews: 18, jobs: 41, reply: "~30 min", img: "/images/keyboardist-wedding.png", pos: "35% 20%", wa: "2340000000000" },
 ];
 
-export const ticker = [
+export const ticker: { who: string; what: string; when: string }[] = [
+  { who: "FindAm", what: "is vetting founding pros across Port Harcourt", when: "now" },
+  { who: "Every pro", what: "gets a workshop visit before going live", when: "always" },
+  { who: "Your requests", what: "are handled personally by our team", when: "always" },
+  { who: "First 30 pros", what: "join completely free", when: "limited" },
+];
+
+const retiredFakeTicker = [
   { who: "Ada in Woji", what: "found an electrician", when: "2 min ago" },
   { who: "Emeka in GRA", what: "booked a deep clean", when: "9 min ago" },
   { who: "Tari in Eliozu", what: "fixed a leaking pipe", when: "14 min ago" },
@@ -22,7 +29,13 @@ export const ticker = [
   { who: "Chuks in Rumuodara", what: "found a wedding keyboardist", when: "33 min ago" },
 ];
 
-export const voices = [
+export const voices: { q: string; w: string; a: string }[] = [
+  { q: "We started FindAm because finding someone you can trust in this city should not depend on who you know. Every pro here was met in person \u2014 workshop seen, references called, ID confirmed \u2014 before you ever see them.", w: "The FindAm team", a: "Port Harcourt" },
+  { q: "We are building the founding class now: the first 30 pros join free, get vetted personally, and grow with us from day one. If you know skilled hands with a good name \u2014 send them our way.", w: "Prince, founder", a: "FindAm" },
+  { q: "Real reviews from real jobs will live here soon. We only publish reviews tied to actual connections made through FindAm \u2014 no invented praise, ever.", w: "Our promise", a: "always" },
+];
+
+const retiredFakeVoices = [
   { q: "He came same day, fixed the fault, and the price he said is the price I paid. I have kept his number.", w: "Mrs. Adaeze", a: "Woji" },
   { q: "First time in Port Harcourt I did not have to beg somebody for a trusted person. I just checked FindAm.", w: "Ibim", a: "GRA" },
   { q: "As a pro, my phone used to be quiet. Now neighbours I have never met are calling me for work.", w: "Chinedu", a: "Electrician, Rumuola" },

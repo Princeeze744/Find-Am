@@ -6,7 +6,7 @@ import HeroRotator from "@/components/HeroRotator";
 import { motion } from "framer-motion";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { Counter, fadeUp, stagger } from "@/components/Motion";
+import { fadeUp, stagger } from "@/components/Motion";
 import { SearchIcon } from "@/components/Icons";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { ticker, voices, longTailChips, heroChips } from "@/lib/data";
