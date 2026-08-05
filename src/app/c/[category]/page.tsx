@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { WhatsAppIcon } from "@/components/Icons";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { prisma } from "@/lib/db";
 
 export const revalidate = 60;
@@ -87,9 +87,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                       <span>~{p.replyMins} min</span>
                     </div>
                     <div className="mt-4 flex gap-2">
-                      <a href={`https://wa.me/${p.whatsapp}`} target="_blank" rel="noopener noreferrer" className="fa-btn flex-1 text-[14px]">
-                        <WhatsAppIcon /> WhatsApp
-                      </a>
+                      <WhatsAppButton proId={p.id} whatsapp={p.whatsapp} source="category_card" className="fa-btn flex-1 text-[14px]" label="WhatsApp" />
                       <Link href={`/pro/${p.slug}`} className="fa-btn-ghost !px-4 text-[14px]">
                         Profile
                       </Link>

@@ -38,6 +38,7 @@ export default async function Home() {
     const ratings = p.reviews.map((r) => r.rating);
     const avg = ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : "New";
     return {
+      id: p.id,
       name: p.name,
       slug: p.slug,
       trade: p.trade,

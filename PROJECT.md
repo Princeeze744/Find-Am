@@ -118,3 +118,53 @@ PARALLEL (Prince's legs): count "who knows a good X" in PH groups · interview 5
 3. Working search (name/trade/tags) + SearchLog + no-dead-end ServiceRequest form.
 4. Lead logging: WhatsApp tap -> POST /api/lead -> wa.me redirect.
 PARALLEL (Prince): discovery count · interviews · vet pro #1 · real photos.
+
+## SESSION LOG — Day 3 (4-5 Aug 2026) — THE ORGANS
+- /join application pipeline: form (socials, video intro link, price guide, area chips)
+  -> /api/join -> Pro status:pending, INVISIBLE until approved. Schema grew: videoUrl,
+  instagram, facebook, tiktok, workPhotos (migration pro_application_fields).
+- /request concierge: describe need + area + phone (NO account needed - deliberate)
+  -> ServiceRequest table. Prefills from failed searches via ?need= param.
+- /admin THRONE ROOM: key-gated (ADMIN_KEY in .env + Vercel), stats cards, pending
+  queue w/ approve(vettedAt+notes)/reject, service requests w/ mark-handled, full pro
+  census w/ lead counts, recent leads, recent searches. FIRST CORONATION DONE: Test
+  Welder approved end-to-end (form -> queue -> approve -> live public profile).
+- /search LIVING: matches name/trade/pro tags/category name+tags (fuzzy nets by
+  design - "drummer" returns Musicians; ranking/grouping polish queued). Every query
+  logged to SearchLog w/ result count. Zero results -> no-dead-end request funnel.
+  Confirmed live: "hair stylist" 0 results -> logged as recruitment order.
+- LEAD COUNTER: WhatsAppButton component (sendBeacon, zero user delay) on all 5
+  surfaces w/ source tags: home_card/category_card/profile_top/profile_bottom/
+  search_card. The number that sells the N1,500/month.
+- NAV: sliding mint pill (layoutId spring) desktop, full-screen deep-green cascade
+  menu mobile. Homepage hides empty categories (auto-appear on first approval).
+- HeroRotator: crossfade+zoom stage (electrician/plumber/keyboardist), trade badge,
+  progress pills. Ezekiel got real portrait. New images: join-hero, admin-ledger,
+  success-shield (mount pending), plumber-portrait.
+- GOTCHAS ADDED: Add-Content onto file w/o trailing newline GLUES onto last line
+  (broke DATABASE_URL w/ ADMIN_KEY) - rewrite .env whole, verify line count ·
+  lone <a eaten by paste AGAIN (WhatsAppButton) - the ledger rule is law ·
+  dev server reads .env at STARTUP ONLY - restart after every env change ·
+  AI "transparent" images are fake (JPEG checkerboard painted in) - icons/logo are
+  hand-coded SVG territory, AI does photos/illustrations only.
+- STRATEGY LOCKED THIS SESSION: requesters NEVER pay to browse/request; concierge
+  offline-hunt = N1,000-2,000 success fee only. NOBODY unvetted ever gets connected
+  (even offline finds get fast-track vet: ID + 2 reference calls + notes). Offline
+  pros get profiles created FOR them after first job. Shadow list = recruitment
+  war chest. Cold start = demand manufactures supply ("do things that don't scale").
+  No social scraping (ToS/NDPR/garbage data) - human intelligence network instead.
+
+## NEXT PHASE — THE SENSES + POLISH
+1. Area lat/lng migration -> "near me" sorting (browser geolocation, free) ->
+   Leaflet+OSM coverage maps (NO Google billing at v1; Places autocomplete later).
+2. Admin: WhatsApp notification to Prince on new request/application · open/handled
+   tabs · "Mark found -> copy WhatsApp template" button · prospects (shadow list) table.
+3. Search polish: exact matches first, "Related pros in X" grouping label.
+4. Design pass: success-shield mounted on received cards · blur placeholders ·
+   loading="eager" LCP · data-scroll-behavior · nav active states on all pages.
+5. Logo forge session: hand-built SVG monogram + draw-on animation + favicon + OG.
+6. LAUNCH DEBT (before ANY public sharing): real pros replace AI faces · ticker/
+   voices/stats become real or clearly badged "preview" · test data cleaned ·
+   Vercel env has ADMIN_KEY (done?) · live smoke test on phone.
+PARALLEL (Prince): vet pro #1 FOR REAL · discovery counting · shadow list starts ·
+photograph real pros golden-hour style.

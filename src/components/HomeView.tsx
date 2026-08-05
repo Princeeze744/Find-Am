@@ -7,13 +7,14 @@ import { motion } from "framer-motion";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { Counter, fadeUp, stagger } from "@/components/Motion";
-import { WhatsAppIcon, SearchIcon } from "@/components/Icons";
+import { SearchIcon } from "@/components/Icons";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { ticker, voices, longTailChips, heroChips } from "@/lib/data";
 
 const headline = ["Find", "someone", "you", "can", "trust,", "in", "two", "minutes."];
 
 export type HomeCategory = { name: string; slug: string; vetted: number; from: string; d: string };
-export type HomePro = { name: string; slug: string; trade: string; areas: string; rating: string; reviews: number; jobs: number; reply: string; img: string; pos: string; wa: string };
+export type HomePro = { id: string; name: string; slug: string; trade: string; areas: string; rating: string; reviews: number; jobs: number; reply: string; img: string; pos: string; wa: string };
 
 export default function HomeView({ categories, pros }: { categories: HomeCategory[]; pros: HomePro[] }) {
   return (
@@ -155,9 +156,7 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
                     <span>{p.jobs} jobs</span>
                     <span>{p.reply}</span>
                   </div>
-                  <a href={`https://wa.me/${p.wa}`} target="_blank" rel="noopener noreferrer" className="fa-btn mt-4 flex w-full text-[14px]">
-                    <WhatsAppIcon /> Chat on WhatsApp
-                  </a>
+                  <WhatsAppButton proId={p.id} whatsapp={p.wa} source="home_card" />
                 </div>
               </motion.div>
             ))}

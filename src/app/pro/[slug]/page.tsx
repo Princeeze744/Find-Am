@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { WhatsAppIcon } from "@/components/Icons";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { prisma } from "@/lib/db";
 
 export const revalidate = 60;
@@ -69,9 +69,7 @@ export default async function ProPage({ params }: { params: Promise<{ slug: stri
             )}
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href={`https://wa.me/${pro.whatsapp}`} target="_blank" rel="noopener noreferrer" className="fa-btn text-[15px]">
-                <WhatsAppIcon /> Chat on WhatsApp
-              </a>
+              <WhatsAppButton proId={pro.id} whatsapp={pro.whatsapp} source="profile_top" className="fa-btn text-[15px]" />
               <a href={`tel:${pro.phone}`} className="fa-btn-ghost text-[15px]">Call</a>
             </div>
           </div>
@@ -140,9 +138,7 @@ export default async function ProPage({ params }: { params: Promise<{ slug: stri
           <p className="mx-auto mt-3 max-w-md text-[14px] leading-relaxed text-[#BFE8D9]">
             Message {pro.name.split(" ")[0]} now &mdash; he typically replies within {pro.replyMins} minutes.
           </p>
-          <a href={`https://wa.me/${pro.whatsapp}`} target="_blank" rel="noopener noreferrer" className="fa-btn mx-auto mt-6 !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]">
-            <WhatsAppIcon /> Chat on WhatsApp
-          </a>
+          <WhatsAppButton proId={pro.id} whatsapp={pro.whatsapp} source="profile_bottom" className="fa-btn mx-auto mt-6 flex !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]" />
         </section>
       </main>
       <SiteFooter />

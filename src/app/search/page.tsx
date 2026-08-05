@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { WhatsAppIcon } from "@/components/Icons";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { prisma } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
@@ -104,9 +104,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
                         <span>{p.jobsDone} jobs</span>
                         <span>~{p.replyMins} min</span>
                       </div>
-                      <a href={`https://wa.me/${p.whatsapp}`} target="_blank" rel="noopener noreferrer" className="fa-btn mt-4 flex w-full text-[14px]">
-                        <WhatsAppIcon /> Chat on WhatsApp
-                      </a>
+                      <WhatsAppButton proId={p.id} whatsapp={p.whatsapp} source="search_card" />
                     </div>
                   </div>
                 );
