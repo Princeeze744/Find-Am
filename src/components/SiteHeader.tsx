@@ -100,9 +100,8 @@ export default function SiteHeader() {
                 return (
                   <motion.div
                     key={l.href}
-                    initial={{ opacity: 0, y: 14 }}
+                    initial={false}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
                     transition={{ delay: 0.08 + i * 0.06, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Link
@@ -123,7 +122,7 @@ export default function SiteHeader() {
                 );
               })}
 
-              <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.45 }} className="mt-6">
+              <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.45 }} className="mt-6">
                 <Link href="/request" className="fa-btn flex w-full !bg-none !bg-[#FAF7F2] !text-[#0A4A3A]">
                   Find me someone I can trust
                 </Link>
