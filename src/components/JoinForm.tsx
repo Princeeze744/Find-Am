@@ -16,6 +16,7 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
     yearsExp: "", bio: "", tags: "", priceGuide: "",
     instagram: "", facebook: "", tiktok: "", videoUrl: "", workPhotos: "",
     customAreas: "", customTrade: "", idType: "", idNumber: "", idPhotoUrl: "",
+    pin: "",
   });
   const [areaIds, setAreaIds] = useState<string[]>([]);
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
@@ -29,6 +30,11 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (form.pin.length !== 4) {
+      setErrorMsg("Please create a 4-digit PIN \u2014 you will use it to sign in.");
+      setState("error");
+      return;
+    }
     if (!form.idType) {
       setErrorMsg("Please choose your ID type \u2014 identity verification is required.");
       setState("error");
@@ -92,6 +98,11 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
         <div>
           <label className={label}>WhatsApp number *</label>
           <input className={input} placeholder="e.g. 2348031234567" value={form.whatsapp} onChange={set("whatsapp")} required />
+        </div>
+        <div>
+          <label className={label}>Create your 4-digit PIN *</label>
+          <input className={input + " tracking-[0.35em] font-semibold"} type="password" inputMode="numeric" maxLength={4} placeholder="\u2022\u2022\u2022\u2022" value={form.pin} onChange={(e) => setForm({ ...form, pin: e.target.value.replace(/[^0-9]/g, "") })} required />
+          <p className="mt-1 text-[12px] text-[#9AA8A1]">You will sign in with your WhatsApp number + this PIN. Keep it private.</p>
         </div>
         <div>
           <label className={label}>What do you do? *</label>

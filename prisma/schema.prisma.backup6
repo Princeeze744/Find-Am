@@ -69,7 +69,6 @@ model Pro {
   idPhotoUrl  String    @default("")
   customAreas String    @default("")
   customTrade String    @default("")
-  pin         String    @default("")
   replyMins   Int       @default(30)
   jobsDone    Int       @default(0)
   category    Category  @relation(fields: [categoryId], references: [id])

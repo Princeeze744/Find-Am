@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Pro" ADD COLUMN     "pin" TEXT NOT NULL DEFAULT '';

@@ -21,6 +21,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No profile found with this number. Apply on the Join page first." }, { status: 404 });
     }
 
+    if (action === "pin") {
+      const supplied = String(b.pin || "").replace(/[^0-9]/g, "");
+      if (!pro.pin) {
+        return NextResponse.json({ error: "No PIN set for this account yet. Use \u0027Forgot PIN\u0027 below to get a code and set one." }, { status: 400 });
+      }
+      if (supplied.length !== 4 || supplied !== pro.pin) {
+        return NextResponse.json({ error: "Wrong PIN. Check and try again." }, { status: 400 });
+      }
+      const jar = await cookies();
+      jar.set("fa-pro", pro.id, { httpOnly: true, sameSite: "lax", maxAge: 60 * 60 * 24 * 30, path: "/" });
+      return NextResponse.json({ ok: true });
+    }
+
     if (action === "request") {
       const otp = code6();
       await prisma.pro.update({
@@ -38,7 +51,8 @@ export async function POST(req: Request) {
       if (supplied !== pro.otpCode) {
         return NextResponse.json({ error: "Wrong code. Check and try again." }, { status: 400 });
       }
-      await prisma.pro.update({ where: { id: pro.id }, data: { otpCode: "", otpExpires: null } });
+      const newPin = String(b.newPin || "").replace(/[^0-9]/g, "").slice(0, 4);
+      await prisma.pro.update({ where: { id: pro.id }, data: { otpCode: "", otpExpires: null, ...(newPin.length === 4 ? { pin: newPin } : {}) } });
       const jar = await cookies();
       jar.set("fa-pro", pro.id, { httpOnly: true, sameSite: "lax", maxAge: 60 * 60 * 24 * 30, path: "/" });
       return NextResponse.json({ ok: true });

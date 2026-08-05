@@ -311,3 +311,19 @@ logo forge session, launch-ready polish pass II.
 - RESEND CODE button on pro-login (OTP relay mercy).
 - STILL ON PRINCE: Termii account + API key (ends manual OTP relay - mandatory
   before scale) · FINDAM_WHATSAPP into config.ts · first founding-pro invitations.
+
+## SESSION LOG — Day 5 night — THE PIN LIBERATION + REQUEST MERCY
+- LOGIN REVOLUTION: phone + 4-digit PIN (created at signup, banks-style). OTP codes
+  DEMOTED to "Forgot PIN?" fallback only (rare; admin relay OK until Termii).
+  Auth API: new "pin" action; "verify" now accepts newPin to reset. JoinForm asks
+  PIN + guard; join API stores it. ProLoginForm rebuilt (pin / forgot-request /
+  forgot-verify modes). DEBT: PIN stored plaintext - hash before money flows.
+  Prince must set own PIN via Forgot flow (account predates PINs).
+- Request form: custom area free-text ("Area not listed? Type it").
+- RESEARCH LOGGED: Thumbtack matches by category+location+availability; "laundry
+  problem" = why tag-level matching matters (our tags ARE the synonym net - fatten
+  per category); their quality bar = 3+ matches per request.
+- QUEUED NEXT: admin service-request glow-up (expandable cards, wa.me contact button
+  intl-format, handled flow w/ resolution note, "Link a pro" matcher w/ fuzzy
+  auto-suggest) · handled cases -> homepage testimonial slider (rides review system) ·
+  WhatsApp for config: Prince's number as 2349035528384 (intl format - test wa.me first).

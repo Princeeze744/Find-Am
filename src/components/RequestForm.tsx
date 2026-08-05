@@ -11,6 +11,7 @@ export default function RequestForm({ states, initialNeed = "" }: { states: Stat
   const [need, setNeed] = useState(initialNeed);
   const [stateId, setStateId] = useState(states.find((s) => s.name === "Rivers")?.id || "");
   const [area, setArea] = useState("");
+  const [customArea, setCustomArea] = useState("");
   const [phone, setPhone] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -26,7 +27,7 @@ export default function RequestForm({ states, initialNeed = "" }: { states: Stat
       const res = await fetch("/api/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ need, area: [currentState?.name, area].filter(Boolean).join(" - "), phone }),
+        body: JSON.stringify({ need, area: [currentState?.name, area || customArea].filter(Boolean).join(" - "), phone }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -86,6 +87,7 @@ export default function RequestForm({ states, initialNeed = "" }: { states: Stat
             placeholder="Choose your area"
             title={currentState ? `Where in ${currentState.name}?` : "Your area"}
           />
+          <input className={input + " mt-2"} placeholder="Area not listed? Type it here" value={customArea} onChange={(e) => setCustomArea(e.target.value)} />
         </div>
       </div>
       <div>

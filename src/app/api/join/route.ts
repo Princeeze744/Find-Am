@@ -52,6 +52,7 @@ export async function POST(req: Request) {
         idPhotoUrl: String(b.idPhotoUrl || "").trim(),
         customAreas: String(b.customAreas || "").trim(),
         customTrade: String(b.customTrade || "").trim(),
+        pin: String(b.pin || "").replace(/[^0-9]/g, "").slice(0, 4),
         status: "pending",
         categoryId: String(b.categoryId),
         stateId: state.id,
