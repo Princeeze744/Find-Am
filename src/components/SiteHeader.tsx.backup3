@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import Logo from "./Logo";
 
 const links = [
@@ -23,9 +22,6 @@ export default function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     fetch("/api/pro-session").then((r) => r.json()).then((d) => setSignedIn(Boolean(d.signedIn))).catch(() => {});
@@ -81,7 +77,6 @@ export default function SiteHeader() {
         </button>
       </div>
 
-      {mounted && createPortal(
       <AnimatePresence>
         {open && (
           <motion.div
@@ -136,8 +131,7 @@ export default function SiteHeader() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>,
-      document.body)}
+      </AnimatePresence>
     </header>
   );
 }
