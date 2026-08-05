@@ -296,3 +296,18 @@ DASHBOARD GLOW-UP (Act II) queued behind this sprint: animated counters,
 self-editing (media edits flag for review), share-my-profile button.
 LAUNCH DEBT remaining: real founding pros (Prince inviting 5-10 this week),
 logo forge session, launch-ready polish pass II.
+
+## SESSION LOG — Day 5 evening — THE USER FEEDBACK SPRINT (same-day turnaround)
+- Real users tested; complaints became features SAME DAY:
+- DE-PH-IFICATION: "Nigeria's trusted hands" hero, Nigeria nav/footer copy, request
+  flow fully national (state picker -> filtered areas, "Where in Taraba?" state-aware
+  titles). JoinForm already national from earlier.
+- CUSTOM INPUTS: free-text areas ("not listed? type it") -> customAreas; custom
+  trade -> customTrade. API accepts typed areas as valid (zero chips OK if typed).
+- INTEGRITY LAYER: ID trio (type via Picker: NIN/Voter's/Driver's/Int'l passport +
+  number + photo link) REQUIRED on join - client guard + API validation. Privacy
+  promise copy. Admin pending queue displays gold ID box w/ clickable photo link +
+  custom fields. Automated KYC (Dojah/QoreID) deferred until volume.
+- RESEND CODE button on pro-login (OTP relay mercy).
+- STILL ON PRINCE: Termii account + API key (ends manual OTP relay - mandatory
+  before scale) · FINDAM_WHATSAPP into config.ts · first founding-pro invitations.

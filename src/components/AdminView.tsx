@@ -6,6 +6,7 @@ type Pending = {
   id: string; name: string; trade: string; phone: string; whatsapp: string;
   bio: string; tags: string; priceGuide: string; yearsExp: number;
   videoUrl: string; instagram: string; facebook: string; tiktok: string; workPhotos: string;
+  idType: string; idNumber: string; idPhotoUrl: string; customAreas: string; customTrade: string;
   createdAt: string;
   category: { name: string };
   areas: { area: { name: string } }[];
@@ -154,6 +155,16 @@ export default function AdminView() {
                 <span>WhatsApp: {p.whatsapp}</span>
                 <span>Areas: {p.areas.map((a) => a.area.name).join(", ") || "none"}</span>
                 <span>Tags: {p.tags || "none"}</span>
+                {p.customAreas && <span className="font-semibold text-[#0A4A3A]">Custom areas (typed): {p.customAreas}</span>}
+                {p.customTrade && <span className="font-semibold text-[#0A4A3A]">Custom category (typed): {p.customTrade}</span>}
+                <span className="sm:col-span-2 rounded-lg border border-[#B78A2E] bg-[#FDF8EE] px-3 py-2 font-medium text-[#5F4A16]">
+                  ID: {p.idType || "MISSING"} &middot; {p.idNumber || "no number"} &middot;{" "}
+                  {p.idPhotoUrl ? (
+                    <a className="text-[#0F6E56] underline" href={p.idPhotoUrl} target="_blank" rel="noopener noreferrer">view ID photo</a>
+                  ) : (
+                    "no photo"
+                  )}
+                </span>
                 {p.priceGuide && <span className="sm:col-span-2">Prices: {p.priceGuide.split("|").join(" \u00b7 ")}</span>}
               </div>
               <div className="mt-3 flex flex-wrap gap-3 text-[13px]">
