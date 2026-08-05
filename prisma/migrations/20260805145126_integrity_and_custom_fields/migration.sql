@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Pro" ADD COLUMN     "customAreas" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "customTrade" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "idNumber" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "idPhotoUrl" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "idType" TEXT NOT NULL DEFAULT '';

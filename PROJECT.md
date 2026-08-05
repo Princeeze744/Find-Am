@@ -265,3 +265,34 @@ hours. Read "Day N" as "Session N". The machine's new benchmark.
 - National join form live: state picker filters areas, API stores state. /join
   force-dynamic (build-freeze bug). Favicon set + viewport discipline shipped.
 - Verdict from Prince: "perfectly working now."
+
+## ═══ HANDOVER SNAPSHOT — 5 Aug 2026, afternoon (READ THIS FIRST IN NEW CHATS) ═══
+STATE: 16-route platform LIVE (find-am-one.vercel.app), repo Princeeze744/Find-Am.
+Theater CLEARED: only real pro = Prince (pianist, founder, stays as pro #001).
+Honest ticker/voices live. Fake stats already gone. WhatsApp config at
+src/lib/config.ts (FINDAM_WHATSAPP = "" — EMPTY, Prince must fill, then Talk-to-us
+links auto-appear). ADMIN_KEY in .env + Vercel. Prisma 6 pinned. All overlays
+PORTALED to document.body (LAW — transform/backdrop-filter ancestors imprison
+fixed children; cost us a full day).
+
+JUST MIGRATED (integrity_and_custom_fields): Pro gained idType, idNumber,
+idPhotoUrl, customAreas, customTrade. NOT YET IN FORMS/API — in-flight work.
+
+IN-FLIGHT SPRINT (from first real-user feedback wave):
+1. DE-PH-IFICATION: copy still says Port Harcourt in HomeView L42 eyebrow,
+   SiteHeader live-dot x2, SiteFooter, menu footer, RequestForm picker title L70.
+   Request flow must become state-aware (state picker -> filtered areas) like join.
+2. Free-text custom area input on pickers ("Add your area" -> customAreas field ->
+   visible in admin for promotion into official Area list). Same for customTrade.
+3. Required-fields tightening on join (bio, areas, 1 price line, ID trio) for integrity.
+4. ID: manual capture NOW (admin eyes); automated KYC (Dojah/QoreID, ~N50-150/check)
+   LATER when volume justifies.
+5. OTP PAIN: manual relay exhausting testers. DECISION MADE: Termii (Option A).
+   WAITING ON PRINCE: termii.com account + sender ID + ~N2-5k funding + API key.
+   Until then: add "resend code" button. 100-user concurrency = Termii mandatory.
+6. Google Places autocomplete: declined again (billing card + per-keystroke cost);
+   free-text + LGA data covers 90% at N0. Architecture welcomes it later.
+DASHBOARD GLOW-UP (Act II) queued behind this sprint: animated counters,
+self-editing (media edits flag for review), share-my-profile button.
+LAUNCH DEBT remaining: real founding pros (Prince inviting 5-10 this week),
+logo forge session, launch-ready polish pass II.

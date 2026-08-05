@@ -64,11 +64,6 @@ model Pro {
   otpCode     String    @default("")
   otpExpires  DateTime?
   willTravel  Boolean   @default(false)
-  idType      String    @default("")
-  idNumber    String    @default("")
-  idPhotoUrl  String    @default("")
-  customAreas String    @default("")
-  customTrade String    @default("")
   replyMins   Int       @default(30)
   jobsDone    Int       @default(0)
   category    Category  @relation(fields: [categoryId], references: [id])
