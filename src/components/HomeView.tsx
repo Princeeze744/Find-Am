@@ -49,9 +49,11 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 1.15, duration: 0.7 }} className="fa-input mt-8 flex max-w-md items-center gap-3 px-5 py-4">
-              <SearchIcon />
-              <input placeholder='Try "AC repair" or "drummer"' className="w-full bg-transparent text-[15px] outline-none placeholder:text-[#9AA8A1]" />
-              <button className="fa-btn !rounded-xl !px-4 !py-2 text-sm">Search</button>
+              <form action="/search" className="flex w-full items-center gap-3">
+                <SearchIcon />
+                <input name="q" required placeholder='Try "AC repair" or "drummer"' className="w-full bg-transparent text-[15px] outline-none placeholder:text-[#9AA8A1]" />
+                <button type="submit" className="fa-btn !rounded-xl !px-4 !py-2 text-sm">Search</button>
+              </form>
             </motion.div>
 
             <motion.div variants={stagger} initial="hidden" animate="show" transition={{ delayChildren: 1.3 }} className="mt-5 flex flex-wrap items-center gap-2">

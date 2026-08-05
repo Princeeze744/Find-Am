@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-export default function RequestForm({ areas }: { areas: { id: string; name: string }[] }) {
-  const [need, setNeed] = useState("");
+export default function RequestForm({ areas, initialNeed = "" }: { areas: { id: string; name: string }[]; initialNeed?: string }) {
+  const [need, setNeed] = useState(initialNeed);
   const [area, setArea] = useState("");
   const [phone, setPhone] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");

@@ -3,9 +3,8 @@ import SiteFooter from "@/components/SiteFooter";
 import RequestForm from "@/components/RequestForm";
 import { prisma } from "@/lib/db";
 
-export const revalidate = 300;
-
-export default async function RequestPage() {
+export default async function RequestPage({ searchParams }: { searchParams: Promise<{ need?: string }> }) {
+  const { need } = await searchParams;
   const rivers = await prisma.state.findUnique({
     where: { slug: "rivers" },
     include: { areas: { orderBy: { name: "asc" } } },
@@ -25,7 +24,7 @@ export default async function RequestPage() {
           </p>
         </section>
         <section className="fa-fluff mt-10 p-6 md:p-10">
-          <RequestForm areas={rivers?.areas ?? []} />
+          <RequestForm areas={rivers?.areas ?? []} initialNeed={need || ""} />
         </section>
       </main>
       <SiteFooter />
