@@ -65,6 +65,7 @@ export async function POST(req: Request) {
         idPhotoUrl: String(b.idPhotoUrl || "").trim(),
         idPhotoBackUrl: String(b.idPhotoBackUrl || "").trim(),
         selfieUrl: String(b.selfieUrl || "").trim(),
+        photoUrl: String(b.photoUrl || "").trim(),
         customAreas: String(b.customAreas || "").trim(),
         customTrade: String(b.customTrade || "").trim(),
         pin: String(b.pin || "").replace(/[^0-9]/g, "").slice(0, 4),

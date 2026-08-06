@@ -12,7 +12,7 @@ type Pending = {
   areas: { area: { name: string } }[];
 };
 type ProRow = {
-  id: string; name: string; trade: string; status: string; jobsDone: number; createdAt: string;
+  id: string; name: string; trade: string; status: string; jobsDone: number; createdAt: string; slug: string;
   category: { name: string };
   _count: { leads: number; reviews: number };
 };
@@ -164,9 +164,8 @@ export default function AdminView() {
                 {(p.idPhotoUrl || p.selfieUrl) && (
                   <span className="sm:col-span-2 flex flex-wrap gap-3">
                     {[
-                      { u: p.idPhotoUrl, l: "ID front" },
-                      { u: p.idPhotoBackUrl, l: "ID back" },
-                      { u: p.selfieUrl, l: "Selfie + ID" },
+                      { u: p.idPhotoUrl, l: "ID" },
+                      { u: p.selfieUrl, l: "Face" },
                     ].filter((x) => x.u).map((x) => (
                       <a key={x.l} href={x.u} target="_blank" rel="noopener noreferrer" className="block text-center">
                         <img src={x.u} alt={x.l} className="h-28 w-28 rounded-xl border border-[#B78A2E] object-cover" />
@@ -261,7 +260,9 @@ export default function AdminView() {
             <span className={"fa-badge " + (p.status === "vetted" ? "" : "!bg-[#FBEAF0] !text-[#993556]")}>{p.status}</span>
             <span className="font-semibold">{p.name}</span>
             <span className="text-[13px] text-[#5A6B63]">{p.trade} &middot; {p.category.name}</span>
-            <span className="ml-auto text-[13px] text-[#5A6B63]">{p._count.leads} leads &middot; {p._count.reviews} reviews &middot; {p.jobsDone} jobs</span>
+            <span className="ml-auto text-[13px] text-[#5A6B63]">{p._count.leads} leads &middot; {p._count.reviews} reviews</span>
+            {p.status === "vetted" && <a href={`/pro/${p.slug}`} target="_blank" rel="noopener noreferrer" className="fa-btn-ghost !px-3 !py-1.5 text-[12px]">View</a>}
+            <button onClick={() => { if (window.confirm(`Delete ${p.name} permanently? This cannot be undone.`)) act({ action: "deletePro", proId: p.id }); }} className="fa-btn-ghost !border-[#F09595] !px-3 !py-1.5 !text-[#A32D2D] text-[12px]">Delete</button>
           </div>
         ))}
       </div>

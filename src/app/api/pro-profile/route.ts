@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/db";
 
-const EDITABLE = ["bio", "tags", "priceGuide", "yearsExp", "videoUrl", "instagram", "facebook", "tiktok", "workPhotos"] as const;
+const EDITABLE = ["photoUrl", "bio", "tags", "priceGuide", "yearsExp", "videoUrl", "instagram", "facebook", "tiktok", "workPhotos"] as const;
 
 export async function POST(req: Request) {
   try {

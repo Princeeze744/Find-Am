@@ -51,6 +51,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, pro });
   }
 
+  if (action === "deletePro") {
+    await prisma.pro.delete({ where: { id: String(proId) } });
+    return NextResponse.json({ ok: true });
+  }
+
   if (action === "reject") {
     const pro = await prisma.pro.update({
       where: { id: String(proId) },

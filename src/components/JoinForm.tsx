@@ -17,7 +17,7 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
     yearsExp: "", bio: "", tags: "", priceGuide: "",
     instagram: "", facebook: "", tiktok: "", videoUrl: "", workPhotos: "",
     customAreas: "", customTrade: "", idType: "", idNumber: "", idPhotoUrl: "", idPhotoBackUrl: "", selfieUrl: "",
-    pin: "",
+    pin: "", photoUrl: "",
   });
   const [areaIds, setAreaIds] = useState<string[]>([]);
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
@@ -37,7 +37,7 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
       return;
     }
     if (!form.idPhotoUrl || !form.selfieUrl) {
-      setErrorMsg("Please upload your ID front photo and a selfie holding your ID.");
+      setErrorMsg("Please upload a photo of your ID and a clear photo of your face.");
       setState("error");
       return;
     }
@@ -75,9 +75,9 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
         </div>
         <p className="fa-serif text-2xl text-[#0A4A3A]">Application received!</p>
         <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-[#5A6B63]">
-          Thank you. Our team will review your application and reach out on WhatsApp
-          to arrange your in-person vetting. Once verified, your profile goes live
-          and neighbours can start finding you.
+          Your profile is now under review. Our verification team checks every
+          application personally &mdash; you can sign in anytime with your number
+          and PIN to see your status. Once approved, your profile goes live.
         </p>
       </div>
     );
@@ -199,6 +199,8 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
         <textarea className={input} rows={2} placeholder="Paste links (Google Drive, Instagram posts...) separated by commas" value={form.workPhotos} onChange={set("workPhotos")} />
       </div>
 
+      <FileUpload label="Your profile photo *" value={form.photoUrl} onUploaded={(url) => setForm({ ...form, photoUrl: url })} hint="A clear, friendly photo of you - customers see this" />
+
       <div className="fa-fluff !rounded-2xl p-5">
         <label className={label}>Identity verification (required &mdash; kept private)</label>
         <p className="mb-3 text-[13px] leading-relaxed text-[#5A6B63]">
@@ -222,10 +224,9 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
           />
           <input className={input} placeholder="ID number *" value={form.idNumber} onChange={set("idNumber")} required />
         </div>
-        <div className="mt-3 grid gap-4 sm:grid-cols-3">
-          <FileUpload label="ID front *" value={form.idPhotoUrl} onUploaded={(url) => setForm({ ...form, idPhotoUrl: url })} hint="Clear photo, all corners visible" />
-          <FileUpload label="ID back" value={form.idPhotoBackUrl} onUploaded={(url) => setForm({ ...form, idPhotoBackUrl: url })} hint="If your ID has a back side" />
-          <FileUpload label="Selfie holding your ID *" value={form.selfieUrl} onUploaded={(url) => setForm({ ...form, selfieUrl: url })} hint="Your face and the ID together" />
+        <div className="mt-3 grid gap-4 sm:grid-cols-2">
+          <FileUpload label="Photo of your ID *" value={form.idPhotoUrl} onUploaded={(url) => setForm({ ...form, idPhotoUrl: url })} hint="Front side, clear, all corners visible" />
+          <FileUpload label="A clear photo of your face *" value={form.selfieUrl} onUploaded={(url) => setForm({ ...form, selfieUrl: url })} hint="Just your face, good light, no cap or glasses" />
         </div>
       </div>
 

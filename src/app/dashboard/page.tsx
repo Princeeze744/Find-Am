@@ -27,6 +27,11 @@ export default async function DashboardPage() {
   if (!pro) redirect("/pro-login");
 
   const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const linkedJobs = await prisma.serviceRequest.findMany({
+    where: { linkedProId: pro.id },
+    orderBy: { createdAt: "desc" },
+    take: 5,
+  });
   const leadsThisWeek = await prisma.lead.count({ where: { proId: pro.id, createdAt: { gte: weekAgo } } });
 
   const ratings = pro.reviews.map((r) => r.rating);
@@ -78,13 +83,27 @@ export default async function DashboardPage() {
           </section>
         )}
 
+        {linkedJobs.length > 0 && (
+          <section className="mt-8">
+            <h2 className="fa-serif text-xl md:text-2xl">Jobs linked to you</h2>
+            <div className="mt-4 space-y-3">
+              {linkedJobs.map((j) => (
+                <div key={j.id} className="fa-fluff border-l-4 !border-l-[#B78A2E] p-4">
+                  <p className="text-[14px] font-medium">{j.need}</p>
+                  <p className="mt-1 text-[13px] text-[#5A6B63]">{j.area} &middot; linked {new Date(j.createdAt).toLocaleDateString()} &middot; the customer expects your call</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className="mt-8">
           <h2 className="fa-serif text-xl md:text-2xl">Your details</h2>
           <div className="fa-fluff mt-4 divide-y divide-[rgba(14,23,19,0.06)] !p-0">
             {[
               ["Trade", pro.trade],
               ["Category", pro.category.name],
-              ["Areas", pro.areas.map((a) => a.area.name).join(", ") || "None set"],
+              ["Areas", [pro.areas.map((a) => a.area.name).join(", "), pro.customAreas].filter(Boolean).join(", ") || "None set"],
               ["Bio", pro.bio || "Not written yet"],
               ["Skills/tags", pro.tags || "None set"],
               ["Price guide", pro.priceGuide ? pro.priceGuide.split("|").join(" \u00b7 ") : "Not set"],
@@ -98,7 +117,7 @@ export default async function DashboardPage() {
             ))}
           </div>
           <h2 className="fa-serif mt-10 text-xl md:text-2xl">Edit your profile</h2>
-          <ProfileEditor initial={{ bio: pro.bio, tags: pro.tags, priceGuide: pro.priceGuide, yearsExp: pro.yearsExp, videoUrl: pro.videoUrl, instagram: pro.instagram, facebook: pro.facebook, tiktok: pro.tiktok, workPhotos: pro.workPhotos }} />
+          <ProfileEditor initial={{ photoUrl: pro.photoUrl, bio: pro.bio, tags: pro.tags, priceGuide: pro.priceGuide, yearsExp: pro.yearsExp, videoUrl: pro.videoUrl, instagram: pro.instagram, facebook: pro.facebook, tiktok: pro.tiktok, workPhotos: pro.workPhotos }} />
         </section>
       </main>
       <SiteFooter />
