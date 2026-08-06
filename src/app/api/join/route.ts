@@ -12,8 +12,11 @@ export async function POST(req: Request) {
   try {
     const b = await req.json();
 
-    if (!b.name || !b.phone || !b.whatsapp || !b.categoryId || !b.trade) {
-      return NextResponse.json({ error: "Please fill name, phone, WhatsApp, trade and category." }, { status: 400 });
+    if (!b.name || !b.phone || !b.whatsapp || !b.trade) {
+      return NextResponse.json({ error: "Please fill name, phone, WhatsApp and what you do." }, { status: 400 });
+    }
+    if (!b.categoryId && !String(b.customTrade || "").trim()) {
+      return NextResponse.json({ error: "Choose a category \u2014 or if yours is not listed, type it in the box above the list." }, { status: 400 });
     }
     if ((!Array.isArray(b.areaIds) || b.areaIds.length === 0) && !String(b.customAreas || "").trim()) {
       return NextResponse.json({ error: "Please select or type at least one area you cover." }, { status: 400 });
@@ -30,6 +33,16 @@ export async function POST(req: Request) {
     }
 
     const whatsapp = String(b.whatsapp).replace(/[^0-9]/g, "");
+
+    let categoryId = String(b.categoryId || "");
+    if (!categoryId) {
+      const fallback = await prisma.category.upsert({
+        where: { slug: "more-services" },
+        update: {},
+        create: { slug: "more-services", name: "More services", tags: "", priceFrom: 0 },
+      });
+      categoryId = fallback.id;
+    }
 
     const pro = await prisma.pro.create({
       data: {
@@ -54,7 +67,7 @@ export async function POST(req: Request) {
         customTrade: String(b.customTrade || "").trim(),
         pin: String(b.pin || "").replace(/[^0-9]/g, "").slice(0, 4),
         status: "pending",
-        categoryId: String(b.categoryId),
+        categoryId,
         stateId: state.id,
         areas: { create: b.areaIds.map((areaId: string) => ({ areaId })) },
       },
