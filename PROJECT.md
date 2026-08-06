@@ -327,3 +327,59 @@ logo forge session, launch-ready polish pass II.
   intl-format, handled flow w/ resolution note, "Link a pro" matcher w/ fuzzy
   auto-suggest) · handled cases -> homepage testimonial slider (rides review system) ·
   WhatsApp for config: Prince's number as 2349035528384 (intl format - test wa.me first).
+
+## ═══ HANDOVER SNAPSHOT — 6 Aug 2026 (CURRENT - READ FIRST IN NEW CHATS) ═══
+STATE: Platform feature-complete for founding operations. 16 routes live
+(find-am-one.vercel.app), repo Princeeze744/Find-Am, all pushed through commit
+"B+C complete". Prisma 6 pinned (NEVER upgrade to 7). ADMIN_KEY in .env + Vercel.
+
+## SESSION LOG — Day 6 — THE SHOUT + THE ARMED DESK
+- WHATSAPP LIVE: FINDAM_WHATSAPP = "2349035528384" in src/lib/config.ts ->
+  "Talk to us" footer link active platform-wide. (Lesson logged: commit said
+  "live" one push before the file actually changed - always read "files changed".)
+- SCROLL CHOREOGRAPHY (Course 1): parallax hero (heroY 0->-48px over 600 scroll),
+  orb depth layer (orbY 0->90 over 800), trust image scale-in 0.94->1. Verdict:
+  beautiful but subtle - Prince wanted MORE.
+- THE SHOUT: .fa-btn light-sweep on hover (skewX gradient sweep), .fa-fluff
+  lift-and-shadow on hover (CAUTION: fa-fluff now has hover transform - portal
+  law protects existing overlays; any future overlay must portal too).
+  DISCOVERY: word-by-word headline assembly already existed on homepage since
+  design session 1. Extracted into reusable AnimatedHeadline component
+  (text/gradWord/className/startDelay props).
+- INNER PAGES ALIVE (Option B): /join headline "Your good name deserves more
+  customers." (grad: name), /request "Tell us what you need." (grad: need) -
+  both assemble word-by-word now.
+- CONCIERGE DESK ARMED (Option C): ServiceRequest gained resolution + linkedProId
+  (migration request_resolution_link). Admin request cards now: "WhatsApp them"
+  button (auto 0->234 intl conversion), "Link a vetted pro" dropdown (native
+  select OK in admin - Prince-only workbench), Mark handled -> window.prompt for
+  resolution note -> displayed as "Resolved: ..." on closed cards. These notes =
+  raw material for future homepage testimonial slider.
+- 3D STRATEGY LOCKED: Course 1 done. Course 2 = ONE 3D moment (React Three Fiber
+  pin-shield, lazy-loaded, static fallback) bundled into logo forge session.
+  Course 3 = pre-rendered scroll-scrub sequences for launch campaigns. LAW:
+  motion loads after content, degrades gracefully, serves the trust story.
+
+## THE QUEUE (in order)
+1. Logo forge session: hand-built SVG FA monogram + draw-on animation + favicon
+   upgrade + OG image + Course 2 (3D pin-shield in hero, lazy+fallback).
+2. Dashboard glow-up: animated counters, self-editing (media edits flag for
+   review), share-my-profile button.
+3. Testimonial slider from request resolutions + review capture flow (lead-tied,
+   verified) - same machinery.
+4. Search polish: exact matches first, "Related pros" grouping.
+5. Housekeeping: .gitignore *.backup + sweep committed backups · hash PINs +
+   signed session cookie BEFORE money flows (SECURITY DEBT).
+
+## ON PRINCE'S DESK (blocking growth, not code)
+- TERMII: account + sender ID + ~N2-5k funding + API key -> ends OTP fallback
+  relay (PIN login already ended daily relay pain).
+- FOUNDING INVITATIONS: 5-10 real pros this week. Platform is READY: honest
+  content, national flows, PIN auth, ID integrity, armed desk.
+- Vet each personally: workshop, references, ID vs submitted trio, golden-hour
+  photo -> approve with real vetting notes.
+
+## KEY NUMBERS/STRINGS
+WhatsApp: 2349035528384 · Admin key name: ADMIN_KEY · DB: Neon "coral-village"
+(withered-hall endpoint - verified NOT Story Box) · Neon password reset: DONE.
+Test on localhost -> Prince approves -> push -> Vercel -> verify live. ALWAYS.
