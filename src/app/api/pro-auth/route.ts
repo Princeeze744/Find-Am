@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/db";
+import { waNumber } from "@/lib/phone";
 
 function code6() {
   return String(Math.floor(100000 + Math.random() * 900000));
@@ -10,7 +11,7 @@ export async function POST(req: Request) {
   try {
     const b = await req.json();
     const action = String(b.action || "");
-    const whatsapp = String(b.whatsapp || "").replace(/[^0-9]/g, "");
+    const whatsapp = waNumber(b.whatsapp);
 
     if (whatsapp.length < 10) {
       return NextResponse.json({ error: "Enter the WhatsApp number you registered with." }, { status: 400 });

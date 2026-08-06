@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { waNumber } from "@/lib/phone";
 
 function slugify(name: string) {
   return (
@@ -32,7 +33,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Please choose your state." }, { status: 400 });
     }
 
-    const whatsapp = String(b.whatsapp).replace(/[^0-9]/g, "");
+    const whatsapp = waNumber(b.whatsapp);
 
     let categoryId = String(b.categoryId || "");
     if (!categoryId) {

@@ -53,5 +53,10 @@ export default async function Home() {
     };
   });
 
-  return <HomeView categories={categories} pros={pros} />;
+  const realSlides = dbPros
+    .filter((p) => p.photoUrl && p.photoUrl.startsWith("http"))
+    .slice(0, 4)
+    .map((p) => ({ src: p.photoUrl, trade: p.trade }));
+
+  return <HomeView categories={categories} pros={pros} realSlides={realSlides} />;
 }

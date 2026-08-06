@@ -1,6 +1,7 @@
 "use client";
 
 import { WhatsAppIcon } from "./Icons";
+import { waNumber } from "@/lib/phone";
 
 export default function WhatsAppButton({
   proId,
@@ -27,7 +28,7 @@ export default function WhatsAppButton({
   }
 
   return (
-    <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener noreferrer" onClick={logLead} className={className}>
+    <a href={`https://wa.me/${waNumber(whatsapp)}`} target="_blank" rel="noopener noreferrer" onClick={logLead} className={className}>
       <WhatsAppIcon /> {label}
     </a>
   );

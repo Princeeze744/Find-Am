@@ -16,7 +16,18 @@ const headline = ["Find", "someone", "you", "can", "trust,", "in", "two", "minut
 export type HomeCategory = { name: string; slug: string; vetted: number; from: string; d: string };
 export type HomePro = { id: string; name: string; slug: string; trade: string; areas: string; rating: string; reviews: number; jobs: number; reply: string; img: string; pos: string; wa: string };
 
-export default function HomeView({ categories, pros }: { categories: HomeCategory[]; pros: HomePro[] }) {
+const brandSlides = [
+  { src: "/images/hero-electrician.png", trade: "Electrician" },
+  { src: "/images/pros/makeup.png", trade: "Makeup artist" },
+  { src: "/images/pros/mc.png", trade: "MC" },
+  { src: "/images/plumber-portrait.jpeg", trade: "Plumber" },
+  { src: "/images/pros/carpenter.png", trade: "Carpenter" },
+  { src: "/images/pros/doctor.png", trade: "Doctor" },
+  { src: "/images/pros/cleaner.png", trade: "Cleaner" },
+];
+
+export default function HomeView({ categories, pros, realSlides = [] }: { categories: HomeCategory[]; pros: HomePro[]; realSlides?: { src: string; trade: string }[] }) {
+  const heroSlides = [...realSlides, ...brandSlides].slice(0, 7);
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 600], [0, -48]);
   const orbY = useTransform(scrollY, [0, 800], [0, 90]);
@@ -79,15 +90,7 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
 
           <motion.div initial={{ opacity: 0, scale: 0.94, y: 30 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }} className="relative">
             <motion.div style={{ y: heroY }}>
-            <HeroRotator slides={[
-              { src: "/images/hero-electrician.png", trade: "Electrician" },
-              { src: "/images/pros/makeup.png", trade: "Makeup artist" },
-              { src: "/images/pros/mc.png", trade: "MC" },
-              { src: "/images/plumber-portrait.jpeg", trade: "Plumber" },
-              { src: "/images/pros/carpenter.png", trade: "Carpenter" },
-              { src: "/images/pros/doctor.png", trade: "Doctor" },
-              { src: "/images/pros/cleaner.png", trade: "Cleaner" },
-            ]} />
+            <HeroRotator slides={heroSlides} />
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.4, duration: 0.7 }} className="fa-fluff absolute -bottom-5 left-2 flex items-center gap-3 px-5 py-3.5 md:left-8">
               <span className="fa-badge">&#10003; Verified</span>
