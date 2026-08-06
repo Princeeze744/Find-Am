@@ -2,6 +2,7 @@ import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import JoinForm from "@/components/JoinForm";
+import AnimatedHeadline from "@/components/AnimatedHeadline";
 import BackLink from "@/components/BackLink";
 import { prisma } from "@/lib/db";
 
@@ -21,9 +22,7 @@ export default async function JoinPage() {
         <section className="grid items-center gap-8 pt-6 md:grid-cols-2 md:gap-12">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#0F6E56]">For skilled hands</p>
-            <h1 className="fa-serif mt-4 text-3xl leading-[1.12] md:text-5xl">
-              Your good name deserves more customers.
-            </h1>
+            <AnimatedHeadline text="Your good name deserves more customers." gradWord="name" className="fa-serif mt-4 max-w-md text-3xl leading-[1.12] md:text-5xl" />
             <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#5A6B63]">
               Join FindAm and let neighbours you have never met find you, trust
               you, and call you. Free to join &mdash; the first 30 pros pay

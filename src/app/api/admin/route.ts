@@ -62,7 +62,11 @@ export async function POST(req: Request) {
   if (action === "requestStatus") {
     const r = await prisma.serviceRequest.update({
       where: { id: String(b.requestId) },
-      data: { status: String(b.status || "open") },
+      data: {
+        status: String(b.status || "open"),
+        resolution: String(b.resolution || "").slice(0, 500),
+        linkedProId: String(b.linkedProId || ""),
+      },
     });
     return NextResponse.json({ ok: true, r });
   }

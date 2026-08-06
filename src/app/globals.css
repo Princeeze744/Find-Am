@@ -373,3 +373,23 @@ html, body {
   max-width: 100%;
   overflow-x: clip;
 }
+
+.fa-btn { position: relative; overflow: hidden; }
+.fa-btn::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -80%;
+  width: 50%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+.fa-btn:hover::after { left: 130%; }
+
+.fa-fluff { transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease; }
+.fa-fluff:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(14,23,19,0.10), 0 30px 60px rgba(14,23,19,0.12); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-btn::after { display: none; }
+  .fa-fluff:hover { transform: none; }
+}

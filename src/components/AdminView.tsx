@@ -16,7 +16,7 @@ type ProRow = {
   category: { name: string };
   _count: { leads: number; reviews: number };
 };
-type Req = { id: string; need: string; area: string; phone: string; status: string; createdAt: string };
+type Req = { id: string; need: string; area: string; phone: string; status: string; createdAt: string; resolution: string; linkedProId: string };
 type LeadRow = { id: string; source: string; createdAt: string; pro: { name: string } };
 type SearchRow = { id: string; query: string; results: number; createdAt: string };
 type OtpRow = { id: string; name: string; whatsapp: string; otpCode: string; otpExpires: string };
@@ -201,19 +201,46 @@ export default function AdminView() {
         <p className="text-[14px] text-[#5A6B63]">No requests yet.</p>
       ) : (
         <div className="space-y-3">
-          {data.requests.map((r) => (
-            <div key={r.id} className="fa-fluff flex flex-wrap items-center gap-3 p-4">
-              <span className={"fa-badge " + (r.status === "open" ? "" : "!bg-[#F1EFE8] !text-[#5F5E5A]")}>{r.status}</span>
-              <span className="flex-1 text-[14px]">{r.need}</span>
-              <span className="text-[13px] text-[#5A6B63]">{r.area || "no area"} &middot; {r.phone}</span>
-              <span className={small}>{new Date(r.createdAt).toLocaleString()}</span>
-              {r.status === "open" && (
-                <button onClick={() => act({ action: "requestStatus", requestId: r.id, status: "handled" })} className="fa-btn-ghost !px-3 !py-1.5 text-[12px]">
-                  Mark handled
-                </button>
+          {data.requests.map((r) => {
+            const wa = r.phone.replace(/[^0-9]/g, "").replace(/^0/, "234");
+            return (
+            <div key={r.id} className="fa-fluff p-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className={"fa-badge " + (r.status === "open" ? "" : "!bg-[#F1EFE8] !text-[#5F5E5A]")}>{r.status}</span>
+                <span className="flex-1 text-[14px] font-medium">{r.need}</span>
+                <span className={small}>{new Date(r.createdAt).toLocaleString()}</span>
+              </div>
+              <div className="mt-2 flex flex-wrap items-center gap-3 text-[13px] text-[#5A6B63]">
+                <span>{r.area || "no area"}</span>
+                <span>{r.phone}</span>
+                <a href={`https://wa.me/${wa}`} target="_blank" rel="noopener noreferrer" className="fa-btn !px-3 !py-1.5 text-[12px]">
+                  WhatsApp them
+                </a>
+              </div>
+              {r.status === "open" ? (
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <select id={"link-" + r.id} className="fa-input !w-auto px-3 py-2 text-[13px] outline-none">
+                    <option value="">Link a vetted pro (optional)</option>
+                    {data.pros.filter((p) => p.status === "vetted").map((p) => (
+                      <option key={p.id} value={p.id}>{p.name} - {p.trade}</option>
+                    ))}
+                  </select>
+                  <button
+                    onClick={() => {
+                      const note = window.prompt("How was this handled? (shown to the team, powers future testimonials)") || "";
+                      const sel = document.getElementById("link-" + r.id) as HTMLSelectElement | null;
+                      act({ action: "requestStatus", requestId: r.id, status: "handled", resolution: note, linkedProId: sel?.value || "" });
+                    }}
+                    className="fa-btn-ghost !px-3 !py-1.5 text-[12px]"
+                  >
+                    Mark handled
+                  </button>
+                </div>
+              ) : (
+                r.resolution && <p className="mt-2 rounded-lg bg-[#F4F8F5] px-3 py-2 text-[13px] text-[#3C4A43]">Resolved: {r.resolution}</p>
               )}
             </div>
-          ))}
+          );})}
         </div>
       )}
 

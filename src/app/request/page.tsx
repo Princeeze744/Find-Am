@@ -2,6 +2,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import RequestForm from "@/components/RequestForm";
 import BackLink from "@/components/BackLink";
+import AnimatedHeadline from "@/components/AnimatedHeadline";
 import { prisma } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
@@ -20,7 +21,7 @@ export default async function RequestPage({ searchParams }: { searchParams: Prom
         <div className="pt-6"><BackLink /></div>
         <section className="pt-6 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#0F6E56]">Concierge</p>
-          <h1 className="fa-serif mt-4 text-3xl leading-[1.12] md:text-5xl">Tell us what you need.</h1>
+          <AnimatedHeadline text="Tell us what you need." gradWord="need" className="fa-serif mx-auto mt-4 max-w-xl text-3xl leading-[1.12] md:text-5xl" />
           <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-[#5A6B63]">
             Electrician, drummer, dispenser repair &mdash; anything, anywhere in
             Nigeria. If we have a vetted pro, we connect you. If we don&apos;t,
