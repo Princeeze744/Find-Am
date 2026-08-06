@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HeroRotator from "@/components/HeroRotator";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { fadeUp, stagger } from "@/components/Motion";
@@ -17,9 +17,12 @@ export type HomeCategory = { name: string; slug: string; vetted: number; from: s
 export type HomePro = { id: string; name: string; slug: string; trade: string; areas: string; rating: string; reviews: number; jobs: number; reply: string; img: string; pos: string; wa: string };
 
 export default function HomeView({ categories, pros }: { categories: HomeCategory[]; pros: HomePro[] }) {
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 600], [0, -48]);
+  const orbY = useTransform(scrollY, [0, 800], [0, 90]);
   return (
     <div className="fa-texture relative">
-      <div className="fa-orb h-[420px] w-[420px] bg-[rgba(15,110,86,0.16)]" style={{ top: "-120px", right: "-100px" }} />
+      <motion.div className="fa-orb h-[420px] w-[420px] bg-[rgba(15,110,86,0.16)]" style={{ top: "-120px", right: "-100px", y: orbY }} />
       {[
         { left: "8%", size: 5, dur: 22, delay: 0 },
         { left: "22%", size: 3, dur: 28, delay: 4 },
@@ -75,6 +78,7 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
           </div>
 
           <motion.div initial={{ opacity: 0, scale: 0.94, y: 30 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }} className="relative">
+            <motion.div style={{ y: heroY }}>
             <HeroRotator slides={[
               { src: "/images/hero-electrician.png", trade: "Electrician" },
               { src: "/images/pros/makeup.png", trade: "Makeup artist" },
@@ -84,6 +88,7 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
               { src: "/images/pros/doctor.png", trade: "Doctor" },
               { src: "/images/pros/cleaner.png", trade: "Cleaner" },
             ]} />
+            </motion.div>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.4, duration: 0.7 }} className="fa-fluff absolute -bottom-5 left-2 flex items-center gap-3 px-5 py-3.5 md:left-8">
               <span className="fa-badge">&#10003; Verified</span>
               <div className="text-[13px] leading-tight">
@@ -208,7 +213,7 @@ export default function HomeView({ categories, pros }: { categories: HomeCategor
         {/* WHY TRUST */}
         <section className="mt-24 md:mt-32">
           <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="fa-photo relative aspect-[5/4]">
+            <motion.div initial={{ opacity: 0, x: -30, scale: 0.94 }} whileInView={{ opacity: 1, x: 0, scale: 1 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="fa-photo relative aspect-[5/4]">
               <Image src="/images/pros/vetting.png" alt="A FindAm verifier inspecting an artisan workshop in Port Harcourt" fill sizes="(max-width: 768px) 100vw, 560px" className="object-cover" />
             </motion.div>
             <div>
