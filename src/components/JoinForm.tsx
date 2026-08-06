@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import Picker from "./Picker";
+import FileUpload from "./FileUpload";
 
 type Cat = { id: string; name: string };
 type AreaOpt = { id: string; name: string };
@@ -15,7 +16,7 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
     name: "", phone: "", whatsapp: "", trade: "", categoryId: "",
     yearsExp: "", bio: "", tags: "", priceGuide: "",
     instagram: "", facebook: "", tiktok: "", videoUrl: "", workPhotos: "",
-    customAreas: "", customTrade: "", idType: "", idNumber: "", idPhotoUrl: "",
+    customAreas: "", customTrade: "", idType: "", idNumber: "", idPhotoUrl: "", idPhotoBackUrl: "", selfieUrl: "",
     pin: "",
   });
   const [areaIds, setAreaIds] = useState<string[]>([]);
@@ -32,6 +33,11 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
     e.preventDefault();
     if (form.pin.length !== 4) {
       setErrorMsg("Please create a 4-digit PIN \u2014 you will use it to sign in.");
+      setState("error");
+      return;
+    }
+    if (!form.idPhotoUrl || !form.selfieUrl) {
+      setErrorMsg("Please upload your ID front photo and a selfie holding your ID.");
       setState("error");
       return;
     }
@@ -216,7 +222,11 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
           />
           <input className={input} placeholder="ID number *" value={form.idNumber} onChange={set("idNumber")} required />
         </div>
-        <input className={input + " mt-3"} placeholder="Link to a clear photo of your ID * (Google Drive, etc.)" value={form.idPhotoUrl} onChange={set("idPhotoUrl")} required />
+        <div className="mt-3 grid gap-4 sm:grid-cols-3">
+          <FileUpload label="ID front *" value={form.idPhotoUrl} onUploaded={(url) => setForm({ ...form, idPhotoUrl: url })} hint="Clear photo, all corners visible" />
+          <FileUpload label="ID back" value={form.idPhotoBackUrl} onUploaded={(url) => setForm({ ...form, idPhotoBackUrl: url })} hint="If your ID has a back side" />
+          <FileUpload label="Selfie holding your ID *" value={form.selfieUrl} onUploaded={(url) => setForm({ ...form, selfieUrl: url })} hint="Your face and the ID together" />
+        </div>
       </div>
 
       <div className="fa-fluff !rounded-2xl p-5">

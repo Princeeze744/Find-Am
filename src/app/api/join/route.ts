@@ -63,6 +63,8 @@ export async function POST(req: Request) {
         idType: String(b.idType || "").trim(),
         idNumber: String(b.idNumber || "").trim(),
         idPhotoUrl: String(b.idPhotoUrl || "").trim(),
+        idPhotoBackUrl: String(b.idPhotoBackUrl || "").trim(),
+        selfieUrl: String(b.selfieUrl || "").trim(),
         customAreas: String(b.customAreas || "").trim(),
         customTrade: String(b.customTrade || "").trim(),
         pin: String(b.pin || "").replace(/[^0-9]/g, "").slice(0, 4),

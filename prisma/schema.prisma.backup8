@@ -67,8 +67,6 @@ model Pro {
   idType      String    @default("")
   idNumber    String    @default("")
   idPhotoUrl  String    @default("")
-  idPhotoBackUrl String @default("")
-  selfieUrl   String    @default("")
   customAreas String    @default("")
   customTrade String    @default("")
   pin         String    @default("")

@@ -6,7 +6,7 @@ type Pending = {
   id: string; name: string; trade: string; phone: string; whatsapp: string;
   bio: string; tags: string; priceGuide: string; yearsExp: number;
   videoUrl: string; instagram: string; facebook: string; tiktok: string; workPhotos: string;
-  idType: string; idNumber: string; idPhotoUrl: string; customAreas: string; customTrade: string;
+  idType: string; idNumber: string; idPhotoUrl: string; idPhotoBackUrl: string; selfieUrl: string; customAreas: string; customTrade: string;
   createdAt: string;
   category: { name: string };
   areas: { area: { name: string } }[];
@@ -159,12 +159,22 @@ export default function AdminView() {
                 {p.customTrade && <span className="font-semibold text-[#0A4A3A]">Custom category (typed): {p.customTrade}</span>}
                 <span className="sm:col-span-2 rounded-lg border border-[#B78A2E] bg-[#FDF8EE] px-3 py-2 font-medium text-[#5F4A16]">
                   ID: {p.idType || "MISSING"} &middot; {p.idNumber || "no number"} &middot;{" "}
-                  {p.idPhotoUrl ? (
-                    <a className="text-[#0F6E56] underline" href={p.idPhotoUrl} target="_blank" rel="noopener noreferrer">view ID photo</a>
-                  ) : (
-                    "no photo"
-                  )}
+                  {p.idPhotoUrl ? "photos below" : "no photos"}
                 </span>
+                {(p.idPhotoUrl || p.selfieUrl) && (
+                  <span className="sm:col-span-2 flex flex-wrap gap-3">
+                    {[
+                      { u: p.idPhotoUrl, l: "ID front" },
+                      { u: p.idPhotoBackUrl, l: "ID back" },
+                      { u: p.selfieUrl, l: "Selfie + ID" },
+                    ].filter((x) => x.u).map((x) => (
+                      <a key={x.l} href={x.u} target="_blank" rel="noopener noreferrer" className="block text-center">
+                        <img src={x.u} alt={x.l} className="h-28 w-28 rounded-xl border border-[#B78A2E] object-cover" />
+                        <span className="mt-1 block text-[11px] font-semibold text-[#5F4A16]">{x.l}</span>
+                      </a>
+                    ))}
+                  </span>
+                )}
                 {p.priceGuide && <span className="sm:col-span-2">Prices: {p.priceGuide.split("|").join(" \u00b7 ")}</span>}
               </div>
               <div className="mt-3 flex flex-wrap gap-3 text-[13px]">
