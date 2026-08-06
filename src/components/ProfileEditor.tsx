@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import FileUpload from "./FileUpload";
 
 type Editable = {
-  photoUrl: string; bio: string; tags: string; priceGuide: string; yearsExp: number;
+  photoUrl: string; dateOfBirth: string; gender: string; bio: string; tags: string; priceGuide: string; yearsExp: number;
   videoUrl: string; instagram: string; facebook: string; tiktok: string; workPhotos: string;
 };
 
@@ -56,6 +56,16 @@ export default function ProfileEditor({ initial }: { initial: Editable }) {
   return (
     <div className="fa-fluff mt-4 space-y-5 p-6">
       <FileUpload label="Profile photo" value={form.photoUrl} onUploaded={(url) => setForm({ ...form, photoUrl: url })} hint="Customers see this on your profile" />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label className={label}>Date of birth</label>
+          <input className={input} type="date" value={form.dateOfBirth} onChange={set("dateOfBirth")} />
+        </div>
+        <div>
+          <label className={label}>Gender</label>
+          <input className={input} placeholder="Female / Male" value={form.gender} onChange={set("gender")} />
+        </div>
+      </div>
       <div>
         <label className={label}>About you (shown on your public profile)</label>
         <textarea className={input} rows={3} placeholder="What you do best, how you work, why people call you back..." value={form.bio} onChange={set("bio")} />

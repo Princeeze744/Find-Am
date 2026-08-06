@@ -72,8 +72,6 @@ model Pro {
   customAreas String    @default("")
   customTrade String    @default("")
   pin         String    @default("")
-  dateOfBirth String    @default("")
-  gender      String    @default("")
   replyMins   Int       @default(30)
   jobsDone    Int       @default(0)
   category    Category  @relation(fields: [categoryId], references: [id])

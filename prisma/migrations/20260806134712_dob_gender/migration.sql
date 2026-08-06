@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Pro" ADD COLUMN     "dateOfBirth" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "gender" TEXT NOT NULL DEFAULT '';

@@ -43,7 +43,13 @@ export default async function DashboardPage() {
       <main className="mx-auto max-w-4xl px-5 pb-24">
         <section className="flex flex-wrap items-center gap-4 pt-10">
           <div className="fa-photo relative h-20 w-20 shrink-0 !rounded-2xl">
-            <Image src={pro.photoUrl || "/images/hero-electrician.png"} alt={pro.name} fill sizes="80px" className="object-cover" />
+            {pro.photoUrl ? (
+              <Image src={pro.photoUrl} alt={pro.name} fill sizes="80px" className="object-cover" />
+            ) : (
+              <span className="fa-serif absolute inset-0 flex items-center justify-center bg-[#0F6E56] text-2xl text-[#E4F5EE]">
+                {pro.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
+              </span>
+            )}
           </div>
           <div className="min-w-0 flex-1">
             <h1 className="fa-serif text-2xl md:text-3xl">Welcome, {pro.name.split(" ")[0]}</h1>
@@ -117,7 +123,7 @@ export default async function DashboardPage() {
             ))}
           </div>
           <h2 className="fa-serif mt-10 text-xl md:text-2xl">Edit your profile</h2>
-          <ProfileEditor initial={{ photoUrl: pro.photoUrl, bio: pro.bio, tags: pro.tags, priceGuide: pro.priceGuide, yearsExp: pro.yearsExp, videoUrl: pro.videoUrl, instagram: pro.instagram, facebook: pro.facebook, tiktok: pro.tiktok, workPhotos: pro.workPhotos }} />
+          <ProfileEditor initial={{ photoUrl: pro.photoUrl, dateOfBirth: pro.dateOfBirth, gender: pro.gender, bio: pro.bio, tags: pro.tags, priceGuide: pro.priceGuide, yearsExp: pro.yearsExp, videoUrl: pro.videoUrl, instagram: pro.instagram, facebook: pro.facebook, tiktok: pro.tiktok, workPhotos: pro.workPhotos }} />
         </section>
       </main>
       <SiteFooter />

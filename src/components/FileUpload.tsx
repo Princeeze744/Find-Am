@@ -51,6 +51,9 @@ export default function FileUpload({
           <button type="button" onClick={() => inputRef.current?.click()} className="fa-chip !cursor-pointer text-[12px]">
             Change
           </button>
+          <button type="button" onClick={() => onUploaded("")} className="fa-chip !cursor-pointer !border-[#F09595] !text-[#A32D2D] text-[12px]">
+            Remove
+          </button>
         </div>
       ) : (
         <button

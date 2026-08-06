@@ -51,7 +51,13 @@ export default async function ProPage({ params }: { params: Promise<{ slug: stri
 
         <section className="mt-8 grid gap-8 md:grid-cols-[300px_1fr] md:gap-12">
           <div className="fa-photo relative aspect-[4/5]">
-            <Image src={pro.photoUrl || "/images/hero-electrician.png"} alt={`${pro.name}, verified ${pro.trade.toLowerCase()} on FindAm`} fill priority sizes="(max-width: 768px) 100vw, 300px" className="object-cover" />
+            {pro.photoUrl ? (
+              <Image src={pro.photoUrl} alt={`${pro.name}, verified ${pro.trade.toLowerCase()} on FindAm`} fill priority sizes="(max-width: 768px) 100vw, 300px" className="object-cover" />
+            ) : (
+              <span className="fa-serif absolute inset-0 flex items-center justify-center bg-[#0F6E56] text-6xl text-[#E4F5EE]">
+                {pro.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
+              </span>
+            )}
           </div>
 
           <div>

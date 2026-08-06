@@ -17,7 +17,7 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
     yearsExp: "", bio: "", tags: "", priceGuide: "",
     instagram: "", facebook: "", tiktok: "", videoUrl: "", workPhotos: "",
     customAreas: "", customTrade: "", idType: "", idNumber: "", idPhotoUrl: "", idPhotoBackUrl: "", selfieUrl: "",
-    pin: "", photoUrl: "",
+    pin: "", photoUrl: "", dateOfBirth: "", gender: "",
   });
   const [areaIds, setAreaIds] = useState<string[]>([]);
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
@@ -92,6 +92,21 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
         <div>
           <label className={label}>Your full name *</label>
           <input className={input} placeholder="e.g. Chinedu Eze" value={form.name} onChange={set("name")} required />
+        </div>
+        <div>
+          <label className={label}>Date of birth *</label>
+          <input className={input} type="date" value={form.dateOfBirth} onChange={set("dateOfBirth")} required />
+        </div>
+        <div>
+          <label className={label}>Gender *</label>
+          <Picker
+            options={[{ id: "Female", label: "Female" }, { id: "Male", label: "Male" }]}
+            value={form.gender}
+            onChange={(id) => setForm({ ...form, gender: id })}
+            placeholder="Select"
+            title="Gender"
+            searchable={false}
+          />
         </div>
         <div>
           <label className={label}>Years of experience</label>

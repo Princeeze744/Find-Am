@@ -69,6 +69,8 @@ export async function POST(req: Request) {
         customAreas: String(b.customAreas || "").trim(),
         customTrade: String(b.customTrade || "").trim(),
         pin: String(b.pin || "").replace(/[^0-9]/g, "").slice(0, 4),
+        dateOfBirth: String(b.dateOfBirth || "").slice(0, 10),
+        gender: String(b.gender || "").slice(0, 10),
         status: "pending",
         categoryId,
         stateId: state.id,
