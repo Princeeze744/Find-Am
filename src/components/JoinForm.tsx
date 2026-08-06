@@ -114,9 +114,12 @@ export default function JoinForm({ categories, states }: { categories: Cat[]; st
           <Picker
             options={categories.map((c) => ({ id: c.id, label: c.name }))}
             value={form.categoryId}
-            onChange={(id) => setForm({ ...form, categoryId: id })}
-            placeholder="Choose the closest category"
+            onChange={(id) => setForm({ ...form, categoryId: id, customTrade: "" })}
+            placeholder="Choose or type your own"
             title="Which category fits you best?"
+            allowCustom
+            customSelected={form.customTrade}
+            onCustom={(val) => setForm({ ...form, customTrade: val, categoryId: "" })}
           />
         </div>
       </div>

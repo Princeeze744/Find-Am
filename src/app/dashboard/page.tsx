@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import LogoutButton from "@/components/LogoutButton";
+import ProfileEditor from "@/components/ProfileEditor";
 import { prisma } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
@@ -96,10 +97,8 @@ export default async function DashboardPage() {
               </div>
             ))}
           </div>
-          <p className="mt-3 text-[13px] text-[#9AA8A1]">
-            Need to change something? Message the FindAm team on WhatsApp and we
-            update it for you &mdash; self-editing is coming soon.
-          </p>
+          <h2 className="fa-serif mt-10 text-xl md:text-2xl">Edit your profile</h2>
+          <ProfileEditor initial={{ bio: pro.bio, tags: pro.tags, priceGuide: pro.priceGuide, yearsExp: pro.yearsExp, videoUrl: pro.videoUrl, instagram: pro.instagram, facebook: pro.facebook, tiktok: pro.tiktok, workPhotos: pro.workPhotos }} />
         </section>
       </main>
       <SiteFooter />

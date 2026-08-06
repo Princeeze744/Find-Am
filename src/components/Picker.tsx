@@ -13,6 +13,9 @@ export default function Picker({
   placeholder = "Choose...",
   title = "Choose one",
   searchable = true,
+  allowCustom = false,
+  customSelected = "",
+  onCustom,
 }: {
   options: PickerOption[];
   value: string;
@@ -20,6 +23,9 @@ export default function Picker({
   placeholder?: string;
   title?: string;
   searchable?: boolean;
+  allowCustom?: boolean;
+  customSelected?: string;
+  onCustom?: (val: string) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -54,8 +60,8 @@ export default function Picker({
         onClick={() => setOpen(true)}
         className="fa-input flex w-full items-center justify-between px-4 py-3 text-left text-[15px]"
       >
-        <span className={selected ? "text-[#14201B]" : "text-[#9AA8A1]"}>
-          {selected ? selected.label : placeholder}
+        <span className={selected || customSelected ? "text-[#14201B]" : "text-[#9AA8A1]"}>
+          {selected ? selected.label : customSelected ? customSelected + " (your own)" : placeholder}
         </span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA8A1" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <path d="m6 9 6 6 6-6" />
@@ -99,7 +105,17 @@ export default function Picker({
               )}
               <div className="mt-3 flex flex-wrap content-start gap-1.5 overflow-y-auto pb-1" style={{ overscrollBehavior: "contain" }}>
                 {filtered.length === 0 && options.length > 0 ? (
-                  <p className="w-full py-6 text-center text-[14px] text-[#9AA8A1]">Nothing matches &ldquo;{query}&rdquo;</p>
+                  allowCustom && query.trim() ? (
+                    <button
+                      type="button"
+                      onClick={() => { onCustom?.(query.trim()); setOpen(false); }}
+                      className="fa-btn mx-auto !px-5 !py-2.5 text-[14px]"
+                    >
+                      + Add &ldquo;{query.trim()}&rdquo;
+                    </button>
+                  ) : (
+                    <p className="w-full py-6 text-center text-[14px] text-[#9AA8A1]">Nothing matches &ldquo;{query}&rdquo;</p>
+                  )
                 ) : (
                   filtered.map((o) => (
                     <button
