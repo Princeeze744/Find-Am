@@ -444,3 +444,64 @@ upload tap, and push ALL UNREPORTED. Next chat: demand the full roll call first,
 then ritual build -> tap test -> push -> chef's retest script (fresh apply w/
 profile photo + typed category + 2 uploads -> PIN sign-in -> edit profile w/ photo
 -> check areas display -> look for linked jobs section).
+
+## ═══ HANDOVER SNAPSHOT — 6 Aug 2026 evening (CURRENT — READ FIRST) ═══
+STATE: Live at find-am-one.vercel.app · repo Princeeze744/Find-Am · Prisma 6 PINNED
+· ADMIN_KEY in .env+Vercel · WhatsApp 2349035528384 in src/lib/config.ts · Blob
+store "findam-uploads" (Public, IAD1 region - cpt1 missed, livable) connected;
+BLOB_READ_WRITE_TOKEN absent from env pulls - uploads may run on VERCEL_OIDC_TOKEN;
+FIRST UPLOAD TAP RESULT STILL UNREPORTED - if uploads fail with auth error, mint
+read-write token in Vercel Storage settings. .gitignore now has .env*.local + *.backup.
+
+## SESSION LOG — Day 6/7 — UPLOADS, SIMPLIFICATION, REAL-USER SPRINT 2
+- CREATABLE PICKER (world-standard combobox): type in category picker -> "+ Add X"
+  -> sets customTrade, clears categoryId. Chef tested it: PERFECT. Join API:
+  customTrade valid without categoryId -> auto-files under upserted "more-services"
+  category (hidden from home until vetted pros exist).
+- DASHBOARD SELF-EDITING LIVE: /api/pro-profile (cookie-auth, EDITABLE whitelist:
+  photoUrl/bio/tags/priceGuide/yearsExp/videoUrl/socials/workPhotos). ProfileEditor
+  component in dashboard. Name/trade/phone LOCKED (vetted identity).
+- PHASE A UPLOADS: @vercel/blob installed · /api/upload (4MB cap - server upload
+  limit is 4.5MB, images only, addRandomSuffix) · FileUpload component (camera/
+  gallery button, thumbnail, Change) · schema: idPhotoBackUrl+selfieUrl added
+  (migration id_upload_fields) · SIMPLIFIED per Prince: ID front + plain face photo
+  ONLY (back button + selfie-holding-ID removed; idPhotoBackUrl dormant in schema).
+- M-BATCH (2nd real-user sprint, from chef feedback): M1 professional success copy
+  ("under review, sign in anytime" - NO whatsapp/email promises; email needs Resend
+  = fetch-quest) · M2 areas bug fixed (dashboard now shows official + customAreas)
+  · M3 PROFILE PHOTO uploads (join form required field + editor + API whitelist +
+  dashboard passes photoUrl) - AI placeholder era ending · M4 admin verbs: View
+  (public profile) + Delete-with-confirm on pro rows (deletePro action) · M5 "Jobs
+  linked to you" section on pro dashboard (reads serviceRequest.linkedProId, gold
+  left border, "customer expects your call").
+- KYC RESEARCH LOGGED: Fiverr-style instant verification = provider SDKs. Nigeria
+  world-standard: Smile ID (9 govt DBs, 132M records, liveness, 99.8% African face
+  accuracy) or Dojah. ~N100-300/check pay-as-you-go. BVN EXCLUDED (sensitivity).
+  Phase A = capture + Prince's eyes (admin shows ID·Face gold frames side by side).
+  Phase B = auto verdicts (VERIFIED/EXPIRED/MISMATCH badges) when Prince brings
+  Smile ID keys. Today's captured artifacts are Phase B's exact inputs.
+- VERCEL CLI linked (ochidi-princes-projects/find-am). Note: v54 CLI, upgrade nag
+  ignored (self-upgrade ENOENT bug).
+
+## FETCH-QUESTS ON PRINCE'S DESK (all block automation, not features)
+1. TERMII (termii.com): account+sender ID+~N2-5k -> auto OTP for Forgot-PIN.
+2. SMILE ID (usesmileid.com): business account+pay-as-you-go -> auto ID verdicts.
+3. RESEND (resend.com): account+API key -> email notifications (application
+   received/approved). Same pattern as Story Box.
+4. FOUNDING INVITATIONS: 5-10 real pros. Chef = real applicant #1 already in!
+
+## QUEUE (next sessions)
+1. ADMIN OVERHAUL SESSION (Prince: "make it fully functional, I'm not there at
+   all"): tabs (Pending/Requests/Pros/Codes/Intel), search/filter, pro detail
+   drawer w/ admin-edit + "request changes" note to pro, bulk actions, stats that
+   link. 2. Job countdown/completion flow on linked jobs (subjective durations -
+   design needed). 3. Logo forge + 3D pin-shield. 4. Testimonial slider (resolution
+   notes accumulating). 5. Review capture (lead-tied). 6. Search ranking polish.
+7. SECURITY DEBT: hash PINs + signed session cookie BEFORE money. 8. Region note:
+   Blob in IAD1; revisit at scale.
+
+## M-BATCH STATUS AT COMPACTION: patches M1-M5 issued; results M1-M5, build, first
+upload tap, and push ALL UNREPORTED. Next chat: demand the full roll call first,
+then ritual build -> tap test -> push -> chef's retest script (fresh apply w/
+profile photo + typed category + 2 uploads -> PIN sign-in -> edit profile w/ photo
+-> check areas display -> look for linked jobs section).
